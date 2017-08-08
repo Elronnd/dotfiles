@@ -10,6 +10,12 @@ call dein#add('tpope/vim-rsi')
 call dein#add('vim-airline/vim-airline')
 call dein#add('vim-airline/vim-airline-themes')
 call dein#add('jfecher/ante_vim')
+call dein#add('udalov/kotlin-vim')
+call dein#add('vim-syntastic/syntastic')
+call dein#add('jrozner/vim-antlr')
+call dein#add('zah/nim.vim')
+call dein#add('Shougo/neocomplete.vim')
+call dein#add('Valloric/YouCompleteMe')
 call dein#end()
 syn on
 
@@ -38,9 +44,12 @@ cabbrev wq1 wq!
 cabbrev Wn wn
 cabbrev WN wn
 
+autocmd BufNewFile,BufRead *.nim set tabstop=4 expandtab shiftwidth=4 softtabstop=4
+"autocmd BufNewFile,BufRead *.nim set tabstop=8 noexpandtab shiftwidth=8 softtabstop=8
 
 set laststatus=2
 
+let g:neocomplete#enable_at_startup = 1
 let g:airline_powerline_fonts = 1
 let g:airline_section_z = airline#section#create(['windowswap', '%3p%% ', 'linenr', ':%3v'])
-"set tabstop=4 expandtab shiftwidth=4 softtabstop=4
+let g:airline#extensions#whitespace#enabled = 0
