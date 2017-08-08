@@ -45,7 +45,6 @@ cabbrev Wn wn
 cabbrev WN wn
 
 autocmd BufNewFile,BufRead *.nim set tabstop=4 expandtab shiftwidth=4 softtabstop=4
-"autocmd BufNewFile,BufRead *.nim set tabstop=8 noexpandtab shiftwidth=8 softtabstop=8
 
 set laststatus=2
 
@@ -53,3 +52,16 @@ let g:neocomplete#enable_at_startup = 1
 let g:airline_powerline_fonts = 1
 let g:airline_section_z = airline#section#create(['windowswap', '%3p%% ', 'linenr', ':%3v'])
 let g:airline#extensions#whitespace#enabled = 0
+
+" Disable notes in syntastic.  Ordinarily I'd keep them, as warnings, but gcc
+" keeps bitching about how the ABI changed 3 major versions ago and I really
+" don't care.
+let g:syntastic_c_errorformat =
+    \ '%-G%f:%s:,' .
+    \ '%-G%f:%l: note:,' .
+    \ '%f:%l:%c: %trror: %m,' .
+    \ '%f:%l:%c: %tarning: %m,' .
+    \ '%f:%l:%c: %m,' .
+    \ '%f:%l: %trror: %m,' .
+    \ '%f:%l: %tarning: %m,' .
+    \ '%f:%l: %m'
