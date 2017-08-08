@@ -60,7 +60,7 @@ let g:syntastic_c_errorformat =
     \ '%-G%f:%s:,' .
     \ '%f:%l:%c: %trror: %m,' .
     \ '%f:%l:%c: %tarning: %m,' .
-    \ '%-G%f:%l: note: %m,' .
+    \ '%W%f:%l: note: %m,' .
     \ '%f:%l:%c: %m,' .
     \ '%f:%l: %trror: %m,' .
     \ '%f:%l: %tarning: %m,' .
