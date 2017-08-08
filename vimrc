@@ -58,9 +58,9 @@ let g:airline#extensions#whitespace#enabled = 0
 " don't care.
 let g:syntastic_c_errorformat =
     \ '%-G%f:%s:,' .
-    \ '%-G%f:%l: note:,' .
     \ '%f:%l:%c: %trror: %m,' .
     \ '%f:%l:%c: %tarning: %m,' .
+    \ '%-G%f:%l: note: %m,' .
     \ '%f:%l:%c: %m,' .
     \ '%f:%l: %trror: %m,' .
     \ '%f:%l: %tarning: %m,' .
