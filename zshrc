@@ -12,7 +12,6 @@ export LANG="en_US.UTF-8"
 alias java="java -Dawt.useSystemAAFontSettings=on"
 export QT_STYLE_OVERRIDE=adwaita-dark
 export PATH=${HOME}/bin:${PATH}:${HOME}/nim/bin:${HOME}/.dmd-install/linux/bin64:${HOME}/.dmd-install/bin:/opt/intel/bin
-. /etc/profile.d/emscripten.sh
 export GOPATH="${HOME}/go"
 autoload -U colors && colors
 autoload compinit && compinit

@@ -152,6 +152,8 @@ AddToMenu "Utilities"
 +		"gnome-terminal" Exec exec gnome-terminal
 +		"" Nop
 +		"Waterfox" Exec exec waterfox
++		"Torbrowser" Exec exec tor-browser-en-us
++		"Chrome" Exec exec google-chrome-stable
 +		"" Nop
 +		"LibreOffice" Exec exec libreoffice
 
