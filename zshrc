@@ -3,16 +3,17 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
-alias ls="ls -FG"
+alias ls="ls -FG --color=always"
 alias vi="vim"
 alias s="screen -d -rRU"
-alias mpl="mpv --no-audio-display"
+alias mpl="mpv --no-audio-display --no-video"
 export LANG="en_US.UTF-8"
-#export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
-alias java="java -Dawt.useSystemAAFontSettings=on"
-export QT_STYLE_OVERRIDE=adwaita-dark
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
+#alias java="java -Dawt.useSystemAAFontSettings=on"
+#export QT_STYLE_OVERRIDE=adwaita-dark
 export PATH=${HOME}/bin:${PATH}:${HOME}/nim/bin:${HOME}/.dmd-install/linux/bin64:${HOME}/.dmd-install/bin:/opt/intel/bin
 export GOPATH="${HOME}/go"
+export DOTNET_CLI_TELEMETRY_OPTOUT=true
 autoload -U colors && colors
 autoload compinit && compinit
 #Bold cyan; hostname; normal; cwd; red; normal
@@ -28,14 +29,22 @@ setbg() {
 }
 
 
+conwert() {
+	$@ | konwert cp437-utf8
+}
+
+
 paste() {
 	if [[ ! -x $1 ]]; then
-		local file=$1
+		local file=$(mktemp).txt
+		cp $1 $file
 	else
 		local file=-
 	fi
 
-	echo $(curl --progress-bar -F"file=@$file" https://0x0.st)
+	curl -F"file=@$file" https://0x0.st
+	rm $file
+	echo
 }
 load() {
 	if [[ ! -x $1 ]]; then
@@ -44,7 +53,8 @@ load() {
 		local file=-
 	fi
 
-	echo $(curl --progress-bar -F"fileToUpload=@$file" -F"reqtype=fileupload" https://catbox.moe/user/api.php)
+	curl -F"fileToUpload=@$file" -F"reqtype=fileupload" https://catbox.moe/user/api.php
+	echo
 }
 sprunge() {
 	if [[ ! -x $1 ]]; then
@@ -53,7 +63,8 @@ sprunge() {
 		local file=-
 	fi
 
-	echo $(curl --progress-bar -F"sprunge=@$file" http://sprunge.us/)
+	curl -F"sprunge=@$file" http://sprunge.us/
+	echo
 }
 ix() {
 	if [[ ! -x $1 ]]; then
@@ -62,10 +73,12 @@ ix() {
 		local file=-
 	fi
 
-	echo $(curl --progress-bar -F"f:1=@$file" http://ix.io/)
+	curl -F"f:1=@$file" http://ix.io/
+	echo
 }
 zippy() {
 	curl -F"fupload=@$1" http://www21.zippyshare.com/upload | cut -c 67-| cut -c -48
+	echo
 }
 
 unset SSH_AUTH_SOCK

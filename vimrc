@@ -1,9 +1,9 @@
 set runtimepath+=/home/elronnd/.vim/dein/repos/github.com/Shougo/dein.vim
 call dein#begin('/home/elronnd/.vim/dein')
 call dein#add('Shougo/dein.vim')
-call dein#add('ctrlpvim/ctrlp.vim')
+"call dein#add('ctrlpvim/ctrlp.vim')
 call dein#add('tpope/vim-surround.git')
-call dein#add('scrooloose/syntastic')
+"call dein#add('scrooloose/syntastic')
 call dein#add('tpope/vim-abolish')
 call dein#add('terryma/vim-multiple-cursors')
 call dein#add('tpope/vim-rsi')
@@ -11,11 +11,15 @@ call dein#add('vim-airline/vim-airline')
 call dein#add('vim-airline/vim-airline-themes')
 call dein#add('jfecher/ante_vim')
 call dein#add('udalov/kotlin-vim')
-call dein#add('vim-syntastic/syntastic')
 call dein#add('jrozner/vim-antlr')
 call dein#add('zah/nim.vim')
-call dein#add('Shougo/neocomplete.vim')
-call dein#add('Valloric/YouCompleteMe')
+"call dein#add('Shougo/neocomplete.vim')
+"call dein#add('Valloric/YouCompleteMe')
+call dein#add('aserebryakov/vim-todo-lists')
+call dein#add('cespare/vim-toml')
+call dein#add('kovisoft/slimv')
+call dein#add('javier-lopez/sprunge.vim')
+call dein#add('quabug/vim-gdscript')
 call dein#end()
 syn on
 
@@ -24,15 +28,20 @@ if dein#check_install()
   call dein#install()
 endif
 
-colo peachpuff
+colorscheme peachpuff
 
-filetype plugin on
+"filetype plugin on
+filetype plugin indent off
 set noexpandtab
 set nocompatible
-hi Search ctermbg=10
+set hlsearch
+hi Search cterm=NONE ctermbg=blue
+hi CursorLine cterm=none ctermbg=234
+set cursorline
 set backspace=indent,eol,start
 set showmode
 set ruler
+set laststatus=2
 set backspace=indent,eol,start
 cabbrev W w
 cabbrev Q q
@@ -44,14 +53,17 @@ cabbrev wq1 wq!
 cabbrev Wn wn
 cabbrev WN wn
 
-autocmd BufNewFile,BufRead *.nim set tabstop=4 expandtab shiftwidth=4 softtabstop=4
+"autocmd BufNewFile,BufRead *.nim set tabstop=4 expandtab shiftwidth=4 softtabstop=4
 
-set laststatus=2
+noremap <Up> <NOP>
+noremap <Down> <NOP>
 
-let g:neocomplete#enable_at_startup = 1
+let g:ycm_server_python_interpreter = '/usr/bin/python2'
 let g:airline_powerline_fonts = 1
 let g:airline_section_z = airline#section#create(['windowswap', '%3p%% ', 'linenr', ':%3v'])
-let g:airline#extensions#whitespace#enabled = 0
+let g:paredit_mode=0
+let g:lisp_rainbow=1
+"let g:airline#extensions#whitespace#enabled = 0
 
 " Disable notes in syntastic.  Ordinarily I'd keep them, as warnings, but gcc
 " keeps bitching about how the ABI changed 3 major versions ago and I really

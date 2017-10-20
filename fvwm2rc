@@ -21,6 +21,7 @@ Style "*" MWMFunctions
 Style "*" HintOverride
 Style "*" MWMDecor
 Style "*" Lenience
+Style "*" SnapAttraction 30
 
 OpaqueMoveSize 10
 EdgeScroll 100 100
@@ -31,7 +32,7 @@ Style * EdgeResizeDelay -1
 
 Style "*" RandomPlacement
 Style "*" SmartPlacement
-#Style "*" !UsePPosition
+Style "*" !UsePPosition
 
 #DecorateTransients
 
@@ -82,7 +83,7 @@ Style "*logout*"    !Title, !Handles, Sticky, WindowListSkip
 
 
 # This one moves and then raises the window if you drag the mouse,
-# only raises the window if you click,  or does a RaiseLower if you double 
+# only raises the window if you click,  or does a RaiseLower if you double
 # click
 AddToFunc "Move-or-Raise" "M" Move
 +              "M" Raise
@@ -96,7 +97,7 @@ AddToFunc "Raise" "C" Raise
 AddToFunc "Lower" "C" Lower
 
 # This one maximizes vertically if you click (leaving room for the GoodStuff bar at the
-# bottom, or does a full maximization if you double click, or a true full vertical 
+# bottom, or does a full maximization if you double click, or a true full vertical
 # maximization if you just hold the mouse button down.
 AddToFunc "maximize_func" "M" Maximize 0 100
 +              "C" Maximize 0 100
@@ -104,7 +105,7 @@ AddToFunc "maximize_func" "M" Maximize 0 100
 
 
 # This one moves and then lowers the window if you drag the mouse,
-# only lowers the window if you click,  or does a RaiseLower if you double 
+# only lowers the window if you click,  or does a RaiseLower if you double
 # click
 AddToFunc "Move-or-Lower" "M" Move
 +              "M" Lower
@@ -116,7 +117,7 @@ AddToFunc "Move-or-Iconify" "M" Move
 +              "D" Iconify
 
 # This one resizes and then raises the window if you drag the mouse,
-# only raises the window if you click,  or does a RaiseLower if you double 
+# only raises the window if you click,  or does a RaiseLower if you double
 # click
 AddToFunc "Resize" "M" Resize
 
@@ -127,7 +128,7 @@ AddToFunc "Resize-or-Raise" "M" Resize
 
 
 # This is provided as a hint only.
-# Move to a known page on the desktop, then start an application in a 
+# Move to a known page on the desktop, then start an application in a
 # known location. Could also switch to a known desktop, I guess
 #Function "abs_coord"
 #	GoToPage "Immediate"	1,1
@@ -155,7 +156,14 @@ AddToMenu "Utilities"
 +		"Torbrowser" Exec exec tor-browser-en-us
 +		"Chrome" Exec exec google-chrome-stable
 +		"" Nop
++		"Godot" Exec exec godot
++		"" Nop
++		"UNDERTALE" Exec exec wine /home/elronnd/UNDERTALE.exe
++		"" Nop
++		"GIMP" Exec exec gimp
 +		"LibreOffice" Exec exec libreoffice
++		"" Nop
++		"OBS" Exec exec obs
 
 # This defines the most common window operations
 AddToMenu "Window Ops" "Lock Screen" Exec exec xscreensaver-command -lock
@@ -188,7 +196,7 @@ AddToMenu "Window Ops2" "Move" Function Move-or-Raise
 +              "ScrollBar" Module FvwmScroll 2 2
 
 #############################################################################
-# One more complex function - couldn't be defined earlier because it used 
+# One more complex function - couldn't be defined earlier because it used
 # pop-up menus
 #
 # This creates a motif-ish sticky menu for the title-bar window-ops
@@ -198,7 +206,7 @@ AddToMenu "Window Ops2" "Move" Function Move-or-Raise
 AddToFunc "window_ops_func" "C" PopUp Window Ops2
 +              "M" PopUp Window Ops2
 # Motif would add
-#       Delete  "DoubleClick"  
+#       Delete  "DoubleClick"
 
 
 ##############################################################################
@@ -231,7 +239,7 @@ Mouse 0		4    	A     	Iconify
 
 # Now the rest of the frame
 # Here I invoke my complex functions for Move-or-lower, Move-or-raise,
-# and Resize-or-Raise. 
+# and Resize-or-Raise.
 # Button 1 in the corner pieces, with any modifiers, gives resize or raise
 # Button 1 in the title, sides, or icon, w/ any modifiers, gives move or raise
 Mouse 1		TS	A	Function "Move-or-Raise"
@@ -283,7 +291,7 @@ Key F1		A	M	Popup "Utilities"
 Key F2		A	M	Popup "Window Ops"
 Key F3 A M Module FvwmWinList
 # Key F4		A	M	Iconify
-#Key F4		A	C	Delete
+Key F4		A	A	Delete
 #Key F4		A	M	Destroy
 #Key F5		A	M	Move
 #Key F6		A	M	Resize
@@ -295,18 +303,20 @@ Key F7 A A Exec exec xscreensaver-command -lock
 # Conflicts with VNC
 # Key F8 A A Exec exec xscreensaver-command -lock
 # Mac-like volume keys
-#Key F9 A A Exec exec mute
-#Key F10 A A Exec exec mixer pcm -5
-#Key F11 A A Exec exec mixer pcm +5
-#Key F12 A A Exec exec killall freeze
+Key F10 A A Exec exec amixer set Master toggle #volume
+Key F11 A S FakeKeypress press F11
+Key F11 A N Exec exec amixer set Master 5%-
+Key F11 A S FakeKeypress press F11
+Key F12 A A Exec exec amixer set Master 5%+
+
 
 #Page Up/Dapge Down keys are used to scroll by one desktop page
 # in any context, press page up/down + control
 # in root context, just pressing page up/down is OK
-# 
+#
 # I prefer the non-wrapping scroll. These are for example purposes only
 #Key Next	A       C       Scroll 100000 0
-#Key Next	R       N       Scroll 100000 0  
+#Key Next	R       N       Scroll 100000 0
 #Key Prior	A       C       Scroll -100000 0
 #Key Prior	R       N       Scroll -100000 0
 
@@ -356,4 +366,4 @@ Key F7 A A Exec exec xscreensaver-command -lock
 *FvwmWinListAction Click3 Module "FvwmIdent" FvwmIdent
 *FvwmWinListUseSkipList
 *FvwmWinListGeometry +0-1
-                                      
+
