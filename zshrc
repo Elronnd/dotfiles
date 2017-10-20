@@ -7,6 +7,7 @@ alias ls="ls -FG --color=always"
 alias vi="vim"
 alias s="screen -d -rRU"
 alias mpl="mpv --no-audio-display --no-video"
+alias rm="rm -i"
 export LANG="en_US.UTF-8"
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
 #alias java="java -Dawt.useSystemAAFontSettings=on"
@@ -80,6 +81,41 @@ zippy() {
 	curl -F"fupload=@$1" http://www21.zippyshare.com/upload | cut -c 67-| cut -c -48
 	echo
 }
+
+encrypt() {
+	local INFILE=$1
+	local OUTFILE=$1.enc
+	openssl aes-256-cbc -salt -in $INFILE -out $OUTFILE && rm $INFILE
+}
+decrypt() {
+	local INFILE=$1
+	local OUTFILE=${INFILE/.enc/}
+	openssl aes-256-cbc -d -salt -in $INFILE -out $OUTFILE
+}
+redundant() {
+	if [[ $# = 0 ]]; then
+		echo "Error: need a file"
+		return 1
+	fi
+
+	local file=$1
+
+	if [[ $# = 1 ]]; then
+		number=16
+	else
+		number=$2
+	fi
+	lennum=${#number}
+
+	for copy in {1..$number}; do
+		actualcopy=$(printf "%0${lennum}d" $copy)
+		cp ${file} ${file}.${actualcopy}
+	done
+}
+
+
+
+
 
 unset SSH_AUTH_SOCK
 . ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
