@@ -89,7 +89,19 @@ encrypt() {
 }
 decrypt() {
 	local INFILE=$1
-	local OUTFILE=${INFILE/.enc/}
+
+	# for 'foo.bla.bar.baz.enc.oopsanotherextension'
+	# Grab 'foo.bla.bar.baz.enc', '.', and 'oopsanotherextension'
+	# and replace with 'foo.bla.bar.baz.enc'
+	local OUTFILE=$(sed 's/\(.*\)\..*$/\1/' <<< $INFILE)
+
+	# But if it's just 'fooblabarbaz', then there's nothing after the '.'
+	# to take away, so in = out = 'fooblabarbaz', which openssl won't like.
+	# So if they're the same, then add a '.decrypted' sufix
+	if [[ $INFILE = $OUTFILE ]]; then
+		OUTFILE=$INFILE.decrypted
+	fi
+
 	openssl aes-256-cbc -d -salt -in $INFILE -out $OUTFILE
 }
 redundant() {
