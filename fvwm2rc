@@ -150,20 +150,22 @@ AddToFunc "std_desktop" "I" GoToPage 3,1
 # This menu will fire up some very common utilities
 AddToMenu "Utilities"
 +		"xterm" Exec exec xterm -fa foo -sb -sl 10000 -j -geom 80x25 -u8 -bg black -fg white -fs 10
-+		"gnome-terminal" Exec exec gnome-terminal
++		"konsole" Exec exec konsole
 +		"" Nop
-+		"Waterfox" Exec exec waterfox
-+		"Torbrowser" Exec exec tor-browser-en-us
++		"Firefox" Exec exec firefox
+#+		"Torbrowser" Exec exec tor-browser-en-us
 +		"Chrome" Exec exec google-chrome-stable
 +		"" Nop
 +		"Godot" Exec exec godot
++		"Steam" Exec exec steam
++		"OBS" Exec exec obs
 +		"" Nop
 +		"UNDERTALE" Exec exec wine /home/elronnd/UNDERTALE.exe
 +		"" Nop
 +		"GIMP" Exec exec gimp
 +		"LibreOffice" Exec exec libreoffice
++		"JDownloader2" Exec exec jdownloader
 +		"" Nop
-+		"OBS" Exec exec obs
 
 # This defines the most common window operations
 AddToMenu "Window Ops" "Lock Screen" Exec exec xscreensaver-command -lock
@@ -291,7 +293,7 @@ Key F1		A	M	Popup "Utilities"
 Key F2		A	M	Popup "Window Ops"
 Key F3 A M Module FvwmWinList
 # Key F4		A	M	Iconify
-Key F4		A	A	Delete
+Key F4		A	M	Delete
 #Key F4		A	M	Destroy
 #Key F5		A	M	Move
 #Key F6		A	M	Resize
@@ -303,11 +305,9 @@ Key F7 A A Exec exec xscreensaver-command -lock
 # Conflicts with VNC
 # Key F8 A A Exec exec xscreensaver-command -lock
 # Mac-like volume keys
-Key F10 A A Exec exec amixer set Master toggle #volume
-Key F11 A S FakeKeypress press F11
-Key F11 A N Exec exec amixer set Master 5%-
-Key F11 A S FakeKeypress press F11
-Key F12 A A Exec exec amixer set Master 5%+
+Key F10 A A Exec exec amixer sset Master toggle
+Key F11 A N Exec exec amixer sset Master 5%-
+Key F12 A A Exec exec amixer sset Master 5%+
 
 
 #Page Up/Dapge Down keys are used to scroll by one desktop page

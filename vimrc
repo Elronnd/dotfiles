@@ -3,6 +3,7 @@ call dein#begin('/home/elronnd/.vim/dein')
 call dein#add('Shougo/dein.vim')
 "call dein#add('ctrlpvim/ctrlp.vim')
 call dein#add('tpope/vim-surround.git')
+call dein#add('tpope/vim-fugitive.git')
 "call dein#add('scrooloose/syntastic')
 call dein#add('tpope/vim-abolish')
 call dein#add('terryma/vim-multiple-cursors')
@@ -19,7 +20,8 @@ call dein#add('aserebryakov/vim-todo-lists')
 call dein#add('cespare/vim-toml')
 call dein#add('kovisoft/slimv')
 call dein#add('javier-lopez/sprunge.vim')
-call dein#add('quabug/vim-gdscript')
+"call dein#add('quabug/vim-gdscript')
+call dein#add('tikhomirov/vim-glsl')
 call dein#end()
 syn on
 
@@ -38,6 +40,7 @@ set hlsearch
 hi Search cterm=NONE ctermbg=blue
 hi CursorLine cterm=none ctermbg=234
 set cursorline
+set directory=.
 set backspace=indent,eol,start
 set showmode
 set ruler
@@ -77,3 +80,7 @@ let g:syntastic_c_errorformat =
     \ '%f:%l: %trror: %m,' .
     \ '%f:%l: %tarning: %m,' .
     \ '%f:%l: %m'
+set timeoutlen=0
+set ttimeoutlen=0
+set notimeout
+set ttimeout

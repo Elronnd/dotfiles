@@ -1,85 +1,76 @@
 #!/usr/bin/env zsh
 HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=100000
+SAVEHIST=100000
 setopt appendhistory
-alias ls="ls -FG --color=always"
+setopt NO_BEEP
+alias ls="ls -FG"
 alias vi="vim"
 alias s="screen -d -rRU"
 alias mpl="mpv --no-audio-display --no-video"
 alias rm="rm -i"
+alias clip="xsel -i -b"
+alias paste="upload 0x0"
+alias mix="upload mixtape"
+alias sprunge="upload sprunge"
+alias ix="upload ix"
 export LANG="en_US.UTF-8"
-export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
+export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
 #alias java="java -Dawt.useSystemAAFontSettings=on"
 #export QT_STYLE_OVERRIDE=adwaita-dark
-export PATH=${HOME}/bin:${PATH}:${HOME}/nim/bin:${HOME}/.dmd-install/linux/bin64:${HOME}/.dmd-install/bin:/opt/intel/bin
+export PATH=${HOME}/bin:${PATH}:/usr/share/perl6/vendor/bin
 export GOPATH="${HOME}/go"
-export DOTNET_CLI_TELEMETRY_OPTOUT=true
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+export EDITOR=vim
+set -o emacs
+export MANPAGER="less"
+export JAVA_HOME="https://github.com/GPUOpen-Tools/CodeXL"
+
 autoload -U colors && colors
 autoload compinit && compinit
+
+new_kern() {
+	local running=${$(uname -r)//-ARCH/}
+	local installed=${${$(pacman -Q linux)//linux}// /} # don't worry about it
+	if [[ $running != $installed ]]; then
+		echo "(%F{yellow}*%f) "
+	fi
+}
+
 #Bold cyan; hostname; normal; cwd; red; normal
 PROMPT="%F{cyan}%B""%m""%f%b""%d-""%F{red}""%h""%f: "
 
 RPROMPT="[%F{yellow}%?%f]"
 PS2="%F{black}%B%_%f%F{green}%B>%f%b "
 zstyle ':completion:*' rehash true
-export MANPAGER="less"
+
+#source $HOME/zshit/lambda.zsh
 
 setbg() {
 	echo -ne "\033]11;#$1\007"
 }
+
+#lambda sansext=filename . 'sed "s/\(.*\)\..*$/\1/" <<< $filename'
 
 
 conwert() {
 	$@ | konwert cp437-utf8
 }
 
-
-paste() {
-	if [[ ! -x $1 ]]; then
-		local file=$(mktemp).txt
-		cp $1 $file
-	else
-		local file=-
-	fi
-
-	curl -F"file=@$file" https://0x0.st
-	rm $file
-	echo
-}
-load() {
-	if [[ ! -x $1 ]]; then
-		local file=$1
-	else
-		local file=-
-	fi
-
-	curl -F"fileToUpload=@$file" -F"reqtype=fileupload" https://catbox.moe/user/api.php
-	echo
-}
-sprunge() {
-	if [[ ! -x $1 ]]; then
-		local file=$1
-	else
-		local file=-
-	fi
-
-	curl -F"sprunge=@$file" http://sprunge.us/
-	echo
-}
-ix() {
-	if [[ ! -x $1 ]]; then
-		local file=$1
-	else
-		local file=-
-	fi
-
-	curl -F"f:1=@$file" http://ix.io/
-	echo
-}
+# it doesn't work for some reason
+#load() {
+#	if [[ ! -x $1 ]]; then
+#		local file=$1
+#	else
+#		local file=-
+#	fi
+#
+#	foo=$(curl -F"fileToUpload=@$file" -F"reqtype=fileupload" https://catbox.moe/user/api.php)
+#	clip <<< $foo
+#	echo $foo
+#}
 zippy() {
-	curl -F"fupload=@$1" http://www21.zippyshare.com/upload | cut -c 67-| cut -c -48
-	echo
+	curl -F"fupload=@$1" -F"private=yes" http://www4.zippyshare.com/upload 2>&1 | grep 'http\:\/\/www4\.zippyshare\.com\/v\/.*\/file\.htm' | tail +3 | head -1
 }
 
 encrypt() {
@@ -124,10 +115,12 @@ redundant() {
 		cp ${file} ${file}.${actualcopy}
 	done
 }
+clc() {
+	sbcl --no-userinit --load $1 --eval "(sb-ext:save-lisp-and-die \"$(sansext $1)\" :toplevel 'main :executable t)"
+}
 
 
+#eval $(thefuck --alias)
 
-
-
-unset SSH_AUTH_SOCK
+#. /etc/profile.d/emscripten.sh
 . ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
