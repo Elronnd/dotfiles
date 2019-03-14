@@ -14,17 +14,23 @@ alias paste="upload 0x0"
 alias mix="upload mixtape"
 alias sprunge="upload sprunge"
 alias ix="upload ix"
+if [[ -v WSL ]]; then
+	alias wig=git.exe
+	alias dub=dub.exe
+	alias dmd=dmd.exe
+	alias rdmd=rdmd.exe
+fi
 export LANG="en_US.UTF-8"
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
 #alias java="java -Dawt.useSystemAAFontSettings=on"
 #export QT_STYLE_OVERRIDE=adwaita-dark
-export PATH=${HOME}/bin:${PATH}:/usr/share/perl6/vendor/bin
+export PATH=${HOME}/bin:${PATH}:/home/elronnd/.perl6/bin:/home/elronnd/.perl6/share/perl6/site/bin
 export GOPATH="${HOME}/go"
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export EDITOR=vim
 set -o emacs
+export DISPLAY=:0
 export MANPAGER="less"
-export JAVA_HOME="https://github.com/GPUOpen-Tools/CodeXL"
 
 autoload -U colors && colors
 autoload compinit && compinit
@@ -32,8 +38,12 @@ autoload compinit && compinit
 new_kern() {
 	local running=${$(uname -r)//-ARCH/}
 	local installed=${${$(pacman -Q linux)//linux}// /} # don't worry about it
-	if [[ $running != $installed ]]; then
+	echo "'$running' ?=\n'$installed'"
+	if [[ $running == $installed ]]; then
+		echo "'$running' != '$installed'"
 		echo "(%F{yellow}*%f) "
+	else
+		echo "'$running' == '$installed'"
 	fi
 }
 
@@ -119,8 +129,62 @@ clc() {
 	sbcl --no-userinit --load $1 --eval "(sb-ext:save-lisp-and-die \"$(sansext $1)\" :toplevel 'main :executable t)"
 }
 
+winef() {
+	local _winef_dict=(
+	fo3 .wine_fo3 64
+	hm .wine_hotlinemiami 32
+	obv .wine_obv 32
+	goi .wine_gettingoverit 32
+	dr .wine_deltarine 32
+	sh .wine_sh 32
+	)
+
+	found=false
+	for key dir arch in $_winef_dict; do
+		if [[ "$key" == "$1" ]]; then
+			found=true
+			break;
+		fi
+	done
+
+	if ! $found; then
+		echo "No such key '$1'"
+		return
+	fi
+
+	#if [[ ! -f "$dir" ]]; then
+	#	echo "No such dir $dir"
+	#	return
+	#fi
+	#export WINEPREFIX=$(readlink -f "$dir")
+	export WINEPREFIX="/home/elronnd/$dir"
+	export WINEARCH=win$arch
+}
+
+alarm() {
+	_do_alarm() {
+		local brightness=$(xbacklight)
+		# if the screen is dim, briefly brighten it, otherwise do the other way around
+		if [[ $brightness -lt 50 ]]; then
+			xbacklight -set 100 -steps 1 -time 0
+		else
+			xbacklight -set 1 -steps 1 -time 0
+		fi
+
+		sleep .06
+
+		# restore the previous brightness
+		xbacklight -set $brightness -steps 1 -time 0
+	}
+
+	$@
+	_do_alarm
+}
+
+
+
 
 #eval $(thefuck --alias)
 
 #. /etc/profile.d/emscripten.sh
-. ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#. ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
