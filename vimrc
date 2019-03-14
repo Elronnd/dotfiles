@@ -1,46 +1,66 @@
-set runtimepath+=/home/elronnd/.vim/dein/repos/github.com/Shougo/dein.vim
-call dein#begin('/home/elronnd/.vim/dein')
-call dein#add('Shougo/dein.vim')
-"call dein#add('ctrlpvim/ctrlp.vim')
-call dein#add('tpope/vim-surround.git')
-call dein#add('tpope/vim-fugitive.git')
-"call dein#add('scrooloose/syntastic')
-call dein#add('tpope/vim-abolish')
-call dein#add('terryma/vim-multiple-cursors')
-call dein#add('tpope/vim-rsi')
-call dein#add('vim-airline/vim-airline')
-call dein#add('vim-airline/vim-airline-themes')
-call dein#add('jfecher/ante_vim')
-call dein#add('udalov/kotlin-vim')
-call dein#add('jrozner/vim-antlr')
-call dein#add('zah/nim.vim')
-"call dein#add('Shougo/neocomplete.vim')
-"call dein#add('Valloric/YouCompleteMe')
-call dein#add('aserebryakov/vim-todo-lists')
-call dein#add('cespare/vim-toml')
-call dein#add('kovisoft/slimv')
-call dein#add('javier-lopez/sprunge.vim')
-"call dein#add('quabug/vim-gdscript')
-call dein#add('tikhomirov/vim-glsl')
-call dein#end()
-syn on
+set nocompatible
+syntax enable
+set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
+if dein#load_state('~/.vim/dein')
+	call dein#begin('~/.vim/dein')
+	call dein#add('~/.vim/dein/repos/github.com/Shougo/dein.vim')
+
+	call dein#add('vim-perl/vim-perl6')
+	"call dein#add('tpope/vim-surround.git')
+	call dein#add('vim-airline/vim-airline')
+	call dein#add('vim-airline/vim-airline-themes')
+	call dein#add('tpope/vim-rsi') "readline shortcuts on :-commandline
+	call dein#add('cespare/vim-toml')
+	call dein#add('javier-lopez/sprunge.vim')
+	call dein#add('tikhomirov/vim-glsl')
+	"call dein#add('tpope/vim-abolish')
+
+	call dein#end()
+	call dein#save_state()
+endif
 
 " install not installed plugins on startup.
 if dein#check_install()
-  call dein#install()
+	call dein#install()
 endif
+
+
+"call dein#add('tpope/vim-fugitive.git') " git support
+"call dein#add('ctrlpvim/ctrlp.vim')     " fuzzy file search, like fzf
+"call dein#add('scrooloose/syntastic')   " linting
+"call dein#add('terryma/vim-multiple-cursors')
+"call dein#add('Shougo/neocomplete.vim') " completion
+"call dein#add('Valloric/YouCompleteMe') " ditto
+"call dein#add('aserebryakov/vim-todo-lists')
+"
+" various languages:
+"call dein#add('jfecher/ante_vim')
+"call dein#add('udalov/kotlin-vim')
+"call dein#add('jrozner/vim-antlr')
+"call dein#add('zah/nim.vim')
+"call dein#add('kovisoft/slimv')         " lisp, modeled after SLIME
+"call dein#add('quabug/vim-gdscript')
+"call dein#add('ziglang/zig.vim')
+
+
 
 colorscheme peachpuff
 
-"filetype plugin on
-filetype plugin indent off
+" Zig is stupid and disallows '\t' as a character in source code
+au bufnewfile,bufread *.zig set shiftwidth=8 softtabstop=8 ",set noexpandtab
+
+filetype plugin indent on
 set noexpandtab
-set nocompatible
 set hlsearch
+
+" search terms are highlighted blue, rather than a blinding bright yellow
 hi Search cterm=NONE ctermbg=blue
+
+" highlight the entirety of the current line dark gray
 hi CursorLine cterm=none ctermbg=234
 set cursorline
-set directory=.
+
+set directory=.  " Put swapfiles in cwd
 set backspace=indent,eol,start
 set showmode
 set ruler
@@ -58,6 +78,8 @@ cabbrev WN wn
 
 "autocmd BufNewFile,BufRead *.nim set tabstop=4 expandtab shiftwidth=4 softtabstop=4
 
+" on a trackpad, I often 'scroll' accidentally, which is disorienting.  This
+" makes that not do anything
 noremap <Up> <NOP>
 noremap <Down> <NOP>
 
