@@ -11,7 +11,7 @@ alias mpl="mpv --no-audio-display --no-video"
 alias rm="rm -i"
 alias clip="xsel -i -b"
 alias paste="upload 0x0"
-alias mix="upload mixtape"
+alias load="upload catbox"
 alias sprunge="upload sprunge"
 alias ix="upload ix"
 if [[ -v WSL ]]; then
@@ -21,16 +21,18 @@ if [[ -v WSL ]]; then
 	alias rdmd=rdmd.exe
 fi
 export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
 #alias java="java -Dawt.useSystemAAFontSettings=on"
 #export QT_STYLE_OVERRIDE=adwaita-dark
-export PATH=${HOME}/bin:${PATH}:/home/elronnd/.perl6/bin:/home/elronnd/.perl6/share/perl6/site/bin
+export PATH=${HOME}/bin:${PATH}:/home/elronnd/.perl6/bin:/home/elronnd/.perl6/share/perl6/site/bin:/usr/share/perl6/vendor/bin
 export GOPATH="${HOME}/go"
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export EDITOR=vim
 set -o emacs
-export DISPLAY=:0
+#export DISPLAY=:0
 export MANPAGER="less"
+export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
 
 autoload -U colors && colors
 autoload compinit && compinit
@@ -131,12 +133,7 @@ clc() {
 
 winef() {
 	local _winef_dict=(
-	fo3 .wine_fo3 64
-	hm .wine_hotlinemiami 32
-	obv .wine_obv 32
-	goi .wine_gettingoverit 32
-	dr .wine_deltarine 32
-	sh .wine_sh 32
+	ow .wine-ow 64
 	)
 
 	found=false
@@ -157,7 +154,7 @@ winef() {
 	#	return
 	#fi
 	#export WINEPREFIX=$(readlink -f "$dir")
-	export WINEPREFIX="/home/elronnd/$dir"
+	export WINEPREFIX="$HOME/$dir"
 	export WINEARCH=win$arch
 }
 

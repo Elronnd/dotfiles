@@ -45,7 +45,7 @@ DeskTopSize 3x3
 *FvwmPager: Fore orchid
 *FvwmPager: Font none
 *FvwmPager: Hilight SlateBlue4
-*FvwmPager: Geometry 65x44-0+80
+*FvwmPager: Geometry 65x44-0+75
 # *FvwmPagerDeskTopScale 72
 *FvwmPager: SolidSeparators
 *FvwmPager: SmallFont none

@@ -77,6 +77,7 @@ cabbrev Wn wn
 cabbrev WN wn
 
 "autocmd BufNewFile,BufRead *.nim set tabstop=4 expandtab shiftwidth=4 softtabstop=4
+autocmd BufNewFile,BufRead *.h set ft=c
 
 " on a trackpad, I often 'scroll' accidentally, which is disorienting.  This
 " makes that not do anything
@@ -88,7 +89,8 @@ let g:airline_powerline_fonts = 1
 let g:airline_section_z = airline#section#create(['windowswap', '%3p%% ', 'linenr', ':%3v'])
 let g:paredit_mode=0
 let g:lisp_rainbow=1
-"let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#whitespace#enabled = 0
+
 
 " Disable notes in syntastic.  Ordinarily I'd keep them, as warnings, but gcc
 " keeps bitching about how the ABI changed 3 major versions ago and I really
