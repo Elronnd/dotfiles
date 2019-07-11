@@ -14,12 +14,12 @@ alias paste="upload 0x0"
 alias load="upload catbox"
 alias sprunge="upload sprunge"
 alias ix="upload ix"
-if [[ -v WSL ]]; then
-	alias wig=git.exe
-	alias dub=dub.exe
-	alias dmd=dmd.exe
-	alias rdmd=rdmd.exe
-fi
+#if [[ -v WSL ]]; then
+#	alias wig=git.exe
+#	alias dub=dub.exe
+#	alias dmd=dmd.exe
+#	alias rdmd=rdmd.exe
+#fi
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
@@ -134,6 +134,7 @@ clc() {
 winef() {
 	local _winef_dict=(
 	ow .wine-ow 64
+	gog .wine-gog 64
 	)
 
 	found=false
@@ -184,4 +185,4 @@ alarm() {
 #eval $(thefuck --alias)
 
 #. /etc/profile.d/emscripten.sh
-#. ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+. ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

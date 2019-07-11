@@ -149,7 +149,7 @@ AddToFunc "std_desktop" "I" GoToPage 3,1
 
 # This menu will fire up some very common utilities
 AddToMenu "Utilities"
-+		"xterm" Exec exec xterm -fa foo -sb -sl 10000 -j -geom 80x25 -u8 -bg black -fg white -fs 10
++		"xterm" Exec exec xterm -fa "DejaVu Sans Mono" -sb -sl 10000 -j -geom 80x25 -u8 -bg black -fg white -fs 10
 +		"konsole" Exec exec konsole
 +		"" Nop
 +		"Firefox" Exec exec firefox
