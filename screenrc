@@ -1,0 +1,15 @@
+startup_message off
+defscrollback 8192
+termcapinfo xterm ti@:te@
+termcapinfo xterm-color ti@:te@
+hardstatus alwayslastline
+hardstatus string '%{gk}[%{G}%H%{g}][%= %{wk}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{g}]%{=b C}[%Y-%m-%d %c]%{W}'
+vbell off
+shell -$SHELL
+logtstamp on
+logtstamp after 1
+defutf8 on
+truecolor on
+setenv LANG en_us.UTF-8
+register B "^A:title "
+bind B process B
