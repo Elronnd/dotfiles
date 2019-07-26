@@ -21,6 +21,7 @@ alias paste="upload 0x0"
 alias load="upload catbox"
 alias sprunge="upload sprunge"
 alias ix="upload ix"
+alias timer=" xterm -cr '#010000' -fa 'DejaVu Sans Mono' -geom 8x1 -bg black -fg white -fs 10 -e 'perl6 timer.p6'"
 #if [[ -v WSL ]]; then
 #	alias wig=git.exe
 #	alias dub=dub.exe
@@ -142,6 +143,8 @@ winef() {
 	local _winef_dict=(
 	ow .wine-ow 64
 	gog .wine-gog 64
+	office .cxoffice/Microsoft_Office_365 32
+	skyrim .wine-skyrim 32
 	)
 
 	found=false
@@ -164,6 +167,9 @@ winef() {
 	#export WINEPREFIX=$(readlink -f "$dir")
 	export WINEPREFIX="$HOME/$dir"
 	export WINEARCH=win$arch
+	if [[ $key = office ]]; then
+		export PATH="$HOME/.crossoverr-install/bin:$PATH"
+	fi
 }
 
 alarm() {
