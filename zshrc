@@ -4,7 +4,11 @@ HISTSIZE=100000
 SAVEHIST=100000
 setopt appendhistory
 setopt NO_BEEP
-alias ls="ls -FG"
+if [[ $(uname) = OpenBSD ]]; then
+	alias ls="gls -F --color=auto"
+else
+	alias ls="ls -F --color=auto"
+fi
 alias vi="vim"
 alias s="screen -d -rRU"
 alias mpl="mpv --no-audio-display --no-video"
