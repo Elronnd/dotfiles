@@ -65,7 +65,6 @@ set backspace=indent,eol,start
 set showmode
 set ruler
 set laststatus=2
-set backspace=indent,eol,start
 cabbrev W w
 cabbrev Q q
 cabbrev Wq wq
@@ -83,6 +82,11 @@ autocmd BufNewFile,BufRead *.h set ft=c
 " makes that not do anything
 noremap <Up> <NOP>
 noremap <Down> <NOP>
+
+noremap  <silent> <C-C> :let @/ = ""<CR>
+inoremap <silent> <C-C> :let @/ = ""<CR>
+vnoremap <silent> <C-C> :let @/ = ""<CR>
+nnoremap <silent> <C-C> :let @/ = ""<CR>
 
 let g:ycm_server_python_interpreter = '/usr/bin/python2'
 let g:airline_powerline_fonts = 1
