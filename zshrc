@@ -33,7 +33,7 @@ export LC_ALL="en_US.UTF-8"
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
 #alias java="java -Dawt.useSystemAAFontSettings=on"
 #export QT_STYLE_OVERRIDE=adwaita-dark
-export PATH=${HOME}/bin:${PATH}:/home/elronnd/.perl6/bin:/home/elronnd/.perl6/share/perl6/site/bin:/usr/share/perl6/vendor/bin
+export PATH=${HOME}/bin:${PATH}:/home/elronnd/.perl6install/bin:/home/elronnd/.perl6install/share/perl6/site/bin
 export GOPATH="${HOME}/go"
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export EDITOR=vim
@@ -48,12 +48,9 @@ autoload compinit && compinit
 new_kern() {
 	local running=${$(uname -r)//-ARCH/}
 	local installed=${${$(pacman -Q linux)//linux}// /} # don't worry about it
-	echo "'$running' ?=\n'$installed'"
-	if [[ $running == $installed ]]; then
-		echo "'$running' != '$installed'"
-		echo "(%F{yellow}*%f) "
+	if [[ $running = $installed ]]; then
 	else
-		echo "'$running' == '$installed'"
+		echo "(%F{yellow}*%f) "
 	fi
 }
 
@@ -141,7 +138,7 @@ clc() {
 
 winef() {
 	local _winef_dict=(
-	ow .wine-ow 64
+	fnv .wine-fnv 64
 	gog .wine-gog 64
 	office .cxoffice/Microsoft_Office_365 32
 	skyrim .wine-skyrim 32
