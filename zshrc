@@ -21,7 +21,8 @@ alias paste="upload 0x0"
 alias load="upload catbox"
 alias sprunge="upload sprunge"
 alias ix="upload ix"
-alias timer=" xterm -cr '#010000' -fa 'DejaVu Sans Mono' -geom 8x1 -bg black -fg white -fs 10 -e 'perl6 timer.p6'"
+alias timer="xterm -cr '#010000' -fa 'DejaVu Sans Mono' -geom 8x1 -bg black -fg white -fs 10 -e 'perl6 timer.p6'"
+alias bat="bat --theme peachpuff -p"
 #if [[ -v WSL ]]; then
 #	alias wig=git.exe
 #	alias dub=dub.exe
