@@ -77,6 +77,7 @@ cabbrev WN wn
 
 "autocmd BufNewFile,BufRead *.nim set tabstop=4 expandtab shiftwidth=4 softtabstop=4
 autocmd BufNewFile,BufRead *.h set ft=c
+autocmd BufNewFile,BufRead *.scm set tabstop=8 expandtab shiftwidth=8 softtabstop=8
 
 " on a trackpad, I often 'scroll' accidentally, which is disorienting.  This
 " makes that not do anything
@@ -112,3 +113,15 @@ set timeoutlen=0
 set ttimeoutlen=0
 set notimeout
 set ttimeout
+
+if &term =~ "screen"
+	set t_ts=k
+	set t_fs=\
+
+	" reset title to zsh upon exiting
+	" so it doesn't get set to 'thanks for flying vim'
+	auto VimLeave * :set t_ts=kzsh\
+endif
+
+let &titlestring = expand("%:t")
+set title
