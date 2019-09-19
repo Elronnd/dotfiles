@@ -1,10 +1,12 @@
 set nocompatible
 syntax enable
 set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
+
 if dein#load_state('~/.vim/dein')
 	call dein#begin('~/.vim/dein')
 	call dein#add('~/.vim/dein/repos/github.com/Shougo/dein.vim')
 
+	call dein#add('ycm-core/YouCompleteMe', {'merged': 0})
 	call dein#add('vim-perl/vim-perl6')
 	"call dein#add('tpope/vim-surround.git')
 	call dein#add('vim-airline/vim-airline')
@@ -14,6 +16,7 @@ if dein#load_state('~/.vim/dein')
 	call dein#add('javier-lopez/sprunge.vim')
 	call dein#add('tikhomirov/vim-glsl')
 	"call dein#add('tpope/vim-abolish')
+
 
 	call dein#end()
 	call dein#save_state()
@@ -85,11 +88,12 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 
 noremap  <silent> <C-C> :let @/ = ""<CR>
-inoremap <silent> <C-C> :let @/ = ""<CR>
+inoremap <silent> <C-C> <C-o>:let @/ = ""<CR>
 vnoremap <silent> <C-C> :let @/ = ""<CR>
 nnoremap <silent> <C-C> :let @/ = ""<CR>
 
-let g:ycm_server_python_interpreter = '/usr/bin/python2'
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_confirm_extra_conf = 0
 let g:airline_powerline_fonts = 1
 let g:airline_section_z = airline#section#create(['windowswap', '%3p%% ', 'linenr', ':%3v'])
 let g:paredit_mode=0

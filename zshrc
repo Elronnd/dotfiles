@@ -12,6 +12,10 @@ elif [[ $(uname) = OpenBSD ]]; then
 else
 	alias ls="ls -FG"
 fi
+alias excel="winef office; cd ~/.cxoffice/Microsoft_Office_365/drive_c/Program\ Files/Microsoft\ Office/root/Office16/; wine EXCEL.EXE"
+objdump() {
+	=objdump -M intel $@ | ddemangle
+}
 alias vi="vim"
 alias s="screen -d -rRU"
 alias mpl="mpv --no-audio-display --no-video"
@@ -34,7 +38,7 @@ export LC_ALL="en_US.UTF-8"
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
 #alias java="java -Dawt.useSystemAAFontSettings=on"
 #export QT_STYLE_OVERRIDE=adwaita-dark
-export PATH=${HOME}/bin:${PATH}:/home/elronnd/.perl6install/bin:/home/elronnd/.perl6install/share/perl6/site/bin
+export PATH=${HOME}/bin:${PATH}:/home/elronnd/.p6install/bin:/home/elronnd/.p6install/share/perl6/site/bin
 export GOPATH="${HOME}/go"
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export EDITOR=vim
