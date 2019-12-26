@@ -6,6 +6,7 @@ hardstatus alwayslastline
 hardstatus string '%{#00ff00;-}[%H][%{-;-}%= %?%-Lw%?%{b#FF0000;#000000}(%{#FFFFFF;#000000}%n%f %t%?(%u)%?%{b#FF0000;#000000})%{#FFFFFF;#000000}%?%+Lw%?%?%=][%Y-%m-%d %c]'
 vbell off
 shell -$SHELL
+term xterm-256color
 logtstamp on
 logtstamp after 1
 defutf8 on
@@ -14,3 +15,4 @@ setenv LANG en_us.UTF-8
 register B "^A:title "
 bind B process B
 password none
+setenv SCREEN_RUNNING 1

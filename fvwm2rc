@@ -149,7 +149,7 @@ AddToFunc "std_desktop" "I" GoToPage 3,1
 
 # This menu will fire up some very common utilities
 AddToMenu "Utilities"
-+		"xterm" Exec exec xterm -fa "DejaVu Sans Mono" -sb -sl 10000 -j -geom 80x25 -u8 -bg black -fg white -fs 10
++		"xterm" Exec exec xterm -fa "DejaVu Sans Mono" -sb -sl 10000 -j -geom 80x25 -u8 -bg black -fg white -fs 10 +fbx
 +		"konsole" Exec exec konsole
 +		"" Nop
 +		"Firefox" Exec exec firefox
@@ -166,6 +166,7 @@ AddToMenu "Utilities"
 +		"LibreOffice" Exec exec libreoffice
 +		"JDownloader2" Exec exec jdownloader
 +		"" Nop
++		"EMACS" Exec exec emacs -mm
 
 # This defines the most common window operations
 AddToMenu "Window Ops" "Lock Screen" Exec exec xscreensaver-command -lock

@@ -6,7 +6,7 @@ if dein#load_state('~/.vim/dein')
 	call dein#begin('~/.vim/dein')
 	call dein#add('~/.vim/dein/repos/github.com/Shougo/dein.vim')
 
-	call dein#add('ycm-core/YouCompleteMe', {'merged': 0})
+	"call dein#add('ycm-core/YouCompleteMe', {'merged': 0})
 	call dein#add('vim-perl/vim-perl6')
 	"call dein#add('tpope/vim-surround.git')
 	call dein#add('vim-airline/vim-airline')
@@ -16,6 +16,7 @@ if dein#load_state('~/.vim/dein')
 	call dein#add('javier-lopez/sprunge.vim')
 	call dein#add('tikhomirov/vim-glsl')
 	"call dein#add('tpope/vim-abolish')
+	call dein#add('vim/killersheep')
 
 
 	call dein#end()
@@ -72,15 +73,16 @@ cabbrev W w
 cabbrev Q q
 cabbrev Wq wq
 cabbrev WQ wq
-cabbrev w1 w!
-cabbrev q1 q!
-cabbrev wq1 wq!
 cabbrev Wn wn
 cabbrev WN wn
 
 "autocmd BufNewFile,BufRead *.nim set tabstop=4 expandtab shiftwidth=4 softtabstop=4
 autocmd BufNewFile,BufRead *.h set ft=c
 autocmd BufNewFile,BufRead *.scm set tabstop=8 expandtab shiftwidth=8 softtabstop=8
+
+
+" No autocomplete in .tex files because just no
+autocmd BufNewFile,BufRead *.tex let g:ycm_auto_trigger=0
 
 " on a trackpad, I often 'scroll' accidentally, which is disorienting.  This
 " makes that not do anything
@@ -94,31 +96,23 @@ nnoremap <silent> <C-C> :let @/ = ""<CR>
 
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_confirm_extra_conf = 0
+
+"let g:ycm_show_diagnostics_ui = 0
+let g:ycm_enable_diagnostic_signs = 0
+let g:ycm_enable_diagnostic_highlighting = 0
+
 let g:airline_powerline_fonts = 1
 let g:airline_section_z = airline#section#create(['windowswap', '%3p%% ', 'linenr', ':%3v'])
 let g:paredit_mode=0
 let g:lisp_rainbow=1
 let g:airline#extensions#whitespace#enabled = 0
 
-
-" Disable notes in syntastic.  Ordinarily I'd keep them, as warnings, but gcc
-" keeps bitching about how the ABI changed 3 major versions ago and I really
-" don't care.
-let g:syntastic_c_errorformat =
-    \ '%-G%f:%s:,' .
-    \ '%f:%l:%c: %trror: %m,' .
-    \ '%f:%l:%c: %tarning: %m,' .
-    \ '%W%f:%l: note: %m,' .
-    \ '%f:%l:%c: %m,' .
-    \ '%f:%l: %trror: %m,' .
-    \ '%f:%l: %tarning: %m,' .
-    \ '%f:%l: %m'
 set timeoutlen=0
 set ttimeoutlen=0
 set notimeout
 set ttimeout
 
-if &term =~ "screen"
+if $SCREEN_RUNNING
 	set t_ts=k
 	set t_fs=\
 

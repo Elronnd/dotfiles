@@ -4,6 +4,10 @@ HISTSIZE=100000
 SAVEHIST=100000
 setopt appendhistory
 setopt NO_BEEP
+setopt histignorespace
+
+# LINUX IS A FUCKING STUPID RETARTED AWFUL I HATE IT I HATE IT I HATE IT STUPID PIECE OF SHIT I JUST WANT THE DAMN CORE FILE FUCK YOU LINUX
+ulimit -c unlimited
 
 if [[ $(uname) = Linux ]]; then
 	alias ls="ls -F --color=auto"
@@ -12,10 +16,28 @@ elif [[ $(uname) = OpenBSD ]]; then
 else
 	alias ls="ls -FG"
 fi
-alias excel="winef office; cd ~/.cxoffice/Microsoft_Office_365/drive_c/Program\ Files/Microsoft\ Office/root/Office16/; wine EXCEL.EXE"
+ms_excel() {
+	winef office
+	pushd ~/.cxoffice/Microsoft_Office_365/drive_c/Program\ Files/Microsoft\ Office/root/Office16/
+	wine EXCEL.EXE
+	popd
+}
+ms_word() {
+	winef office
+	pushd ~/.cxoffice/Microsoft_Office_365/drive_c/Program\ Files/Microsoft\ Office/root/Office16/
+	wine WINWORD.EXE
+	popd
+}
+ms_ppt() {
+	winef office
+	pushd ~/.cxoffice/Microsoft_Office_365/drive_c/Program\ Files/Microsoft\ Office/root/Office16/
+	wine OUTLOOK.EXE
+	popd
+}
 objdump() {
 	=objdump -M intel $@ | ddemangle
 }
+alias gl="googler --count 3 --noprompt"
 alias vi="vim"
 alias s="screen -d -rRU"
 alias mpl="mpv --no-audio-display --no-video"
@@ -27,20 +49,26 @@ alias sprunge="upload sprunge"
 alias ix="upload ix"
 alias timer="xterm -cr '#010000' -fa 'DejaVu Sans Mono' -geom 8x1 -bg black -fg white -fs 10 -e 'perl6 timer.p6'"
 alias bat="bat --theme peachpuff -p"
+alias gdb="gdb -q"
 #if [[ -v WSL ]]; then
 #	alias wig=git.exe
 #	alias dub=dub.exe
 #	alias dmd=dmd.exe
 #	alias rdmd=rdmd.exe
 #fi
+
+# Make Qt applications shut up
+export XDG_RUNTIME_DIR=/tmp/runtime-elronnd
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
 #alias java="java -Dawt.useSystemAAFontSettings=on"
 #export QT_STYLE_OVERRIDE=adwaita-dark
-export PATH=${HOME}/bin:${PATH}:/home/elronnd/.p6install/bin:/home/elronnd/.p6install/share/perl6/site/bin
+export PATH=$HOME/bin:$HOME/.p6install/bin:$HOME/.p6install/share/perl6/site/bin:${PATH}:/usr/local/bin/:$HOME/.wine-install/bin:/opt/texlive/2019/bin/x86_64-linux/:$HOME/.dyalog/opt/mdyalog/17.1/64/unicode/:$HOME/.cargo/bin
+
 export GOPATH="${HOME}/go"
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
+export MANPATH=/usr/share/man/:/opt/texlive/2019/texmf-dist/doc/man/
 export EDITOR=vim
 set -o emacs
 #export DISPLAY=:0
@@ -66,13 +94,13 @@ RPROMPT="[%F{yellow}%?%f]"
 PS2="%F{black}%B%_%f%F{green}%B>%f%b "
 zstyle ':completion:*' rehash true
 
-#source $HOME/zshit/lambda.zsh
+source $HOME/code/zshit/lambda.zsh
 
 setbg() {
 	echo -ne "\033]11;#$1\007"
 }
 
-#lambda sansext=filename . 'sed "s/\(.*\)\..*$/\1/" <<< $filename'
+lambda sansext=filename . 'sed "s/\(.*\)\..*$/\1/" <<< $filename'
 
 
 conwert() {
