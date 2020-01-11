@@ -166,7 +166,7 @@ AddToMenu "Utilities"
 +		"LibreOffice" Exec exec libreoffice
 +		"JDownloader2" Exec exec jdownloader
 +		"" Nop
-+		"EMACS" Exec exec emacs -mm
++		"EMACS" Exec exec emacs -mm -fs
 
 # This defines the most common window operations
 AddToMenu "Window Ops" "Lock Screen" Exec exec xscreensaver-command -lock

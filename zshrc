@@ -64,7 +64,7 @@ export LC_ALL="en_US.UTF-8"
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
 #alias java="java -Dawt.useSystemAAFontSettings=on"
 #export QT_STYLE_OVERRIDE=adwaita-dark
-export PATH=$HOME/bin:$HOME/.p6install/bin:$HOME/.p6install/share/perl6/site/bin:${PATH}:/usr/local/bin/:$HOME/.wine-install/bin:/opt/texlive/2019/bin/x86_64-linux/:$HOME/.dyalog/opt/mdyalog/17.1/64/unicode/:$HOME/.cargo/bin
+export PATH=$HOME/bin:$HOME/.gdcinstall/bin:$HOME/.p6install/bin:$HOME/.p6install/share/perl6/site/bin:${PATH}:/usr/local/bin/:$HOME/.wine-install/bin:/opt/texlive/2019/bin/x86_64-linux/:$HOME/.dyalog/opt/mdyalog/17.1/64/unicode/:$HOME/.cargo/bin
 
 export GOPATH="${HOME}/go"
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
