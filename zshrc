@@ -9,6 +9,10 @@ setopt histignorespace
 # LINUX IS A FUCKING STUPID RETARTED AWFUL I HATE IT I HATE IT I HATE IT STUPID PIECE OF SHIT I JUST WANT THE DAMN CORE FILE FUCK YOU LINUX
 ulimit -c unlimited
 
+if [[ ! -z $ARCAN_CONNPATH ]]; then
+	export QT_QPA_PLATFORM=wayland
+fi
+
 if [[ $(uname) = Linux ]]; then
 	alias ls="ls -F --color=auto"
 elif [[ $(uname) = OpenBSD ]]; then
@@ -47,6 +51,7 @@ alias paste="upload 0x0"
 alias load="upload catbox"
 alias sprunge="upload sprunge"
 alias ix="upload ix"
+alias hate="upload haste"
 alias timer="xterm -cr '#010000' -fa 'DejaVu Sans Mono' -geom 8x1 -bg black -fg white -fs 10 -e 'perl6 timer.p6'"
 alias bat="bat --theme peachpuff -p"
 alias gdb="gdb -q"
@@ -64,11 +69,11 @@ export LC_ALL="en_US.UTF-8"
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
 #alias java="java -Dawt.useSystemAAFontSettings=on"
 #export QT_STYLE_OVERRIDE=adwaita-dark
-export PATH=$HOME/bin:$HOME/.gdcinstall/bin:$HOME/.p6install/bin:$HOME/.p6install/share/perl6/site/bin:${PATH}:/usr/local/bin/:$HOME/.wine-install/bin:/opt/texlive/2019/bin/x86_64-linux/:$HOME/.dyalog/opt/mdyalog/17.1/64/unicode/:$HOME/.cargo/bin
+export PATH=$HOME/bin:$HOME/code/dmd/install/linux/bin64:$HOME/code/dmd/dub/bin:$HOME/code/dmd/install/bin:$HOME/.emacsinstall/bin:$HOME/.gdcinstall/bin:$HOME/.p6install/bin:$HOME/.p6install/share/perl6/site/bin:/bin:/usr/local/bin:/opt/texlive/2019/bin/x86_64-linux:$HOME/.cargo/bin:$HOME/.arcanstall/bin:/usr/local/Wolfram/WolframEngine/12.0/Executables:/usr/local/Wolfram/WolframEngine/12.0/SystemFiles/Kernel/Binaries/Linux-x86-64:$HOME/.winestall/bin:$HOME/games/bin:$HOME/.local/bin #:$HOME/.dyalog/opt/mdyalog/17.1/64/unicode/
 
 export GOPATH="${HOME}/go"
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
-export MANPATH=/usr/share/man/:/opt/texlive/2019/texmf-dist/doc/man/
+export MANPATH=/usr/share/man:/opt/texlive/2019/texmf-dist/doc/man
 export EDITOR=vim
 set -o emacs
 #export DISPLAY=:0
@@ -90,7 +95,11 @@ new_kern() {
 #Bold cyan; hostname; normal; cwd; red; normal
 PROMPT="%F{cyan}%B""%m""%f%b""%d-""%F{red}""%h""%f: "
 
-RPROMPT="[%F{yellow}%?%f]"
+# no rprompt when in emacs/vterm, because it messes stuff up
+if [[ -z $INSIDE_EMACS ]]; then
+    RPROMPT="[%F{yellow}%?%f]"
+fi
+
 PS2="%F{black}%B%_%f%F{green}%B>%f%b "
 zstyle ':completion:*' rehash true
 
@@ -174,7 +183,7 @@ winef() {
 	fnv .wine-fnv 64
 	gog .wine-gog 64
 	office .cxoffice/Microsoft_Office_365 32
-	skyrim .wine-skyrim 32
+	witness .wineness 64
 	)
 
 	found=false
@@ -229,3 +238,9 @@ alarm() {
 
 #. /etc/profile.d/emscripten.sh
 . ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+PATH="/home/elronnd/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/elronnd/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/elronnd/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/elronnd/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/elronnd/perl5"; export PERL_MM_OPT;

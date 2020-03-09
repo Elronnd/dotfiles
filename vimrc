@@ -17,6 +17,8 @@ if dein#load_state('~/.vim/dein')
 	call dein#add('tikhomirov/vim-glsl')
 	"call dein#add('tpope/vim-abolish')
 	call dein#add('vim/killersheep')
+	call dein#add('itchyny/vim-haskell-indent')
+	"call dein#add('zxqfl/tabnine-vim')
 
 
 	call dein#end()
@@ -24,9 +26,9 @@ if dein#load_state('~/.vim/dein')
 endif
 
 " install not installed plugins on startup.
-if dein#check_install()
-	call dein#install()
-endif
+"if dein#check_install()
+"	call dein#install()
+"endif
 
 
 "call dein#add('tpope/vim-fugitive.git') " git support
@@ -52,6 +54,7 @@ colorscheme peachpuff
 
 " Zig is stupid and disallows '\t' as a character in source code
 au bufnewfile,bufread *.zig set shiftwidth=8 softtabstop=8 ",set noexpandtab
+au bufnewfile,bufread *.hs set shiftwidth=8 softtabstop=8 expandtab
 
 filetype plugin indent on
 set noexpandtab

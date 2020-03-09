@@ -1,6 +1,8 @@
 ;;; Nicer font than the default
 (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-12"))
 
+;(add-to-list 'default-frame-alist '(scroll-bar-width . 12))
+
 ;;; Colourscheme stuff
 (custom-set-faces
  '(default ((t (:foreground "#eeeeee" :background "#080808"))))

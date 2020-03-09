@@ -265,17 +265,22 @@ Mouse 3		TSF	A	Lower
 
 # Button 3 in the window, with the Modifier-1 key (usually alt or diamond)
 # gives Raise-Lower. Used to use control here, but that interferes with xterm
-Mouse 3         W       M       Move
+#Mouse 3         W       M       Move
 
 ############################################################################
 # Now some keyboard shortcuts.
 
 # Arrow Keys
-# press arrow + control anywhere, and scroll by 1 page
+# press arrow + control|super anywhere, and scroll by 1 page
 Key Left	A	C	Scroll -100 0
 Key Right	A	C	Scroll +100 +0
 Key Up		A	C	Scroll +0   -100
 Key Down	A	C	Scroll +0   +100
+
+Key Left	A	4	Scroll -100 0
+Key Right	A	4	Scroll +100 +0
+Key Up		A	4	Scroll +0   -100
+Key Down	A	4	Scroll +0   +100
 
 # press shift arrow + control anywhere, and move the pointer by 1% of a page
 Key Left	A	SC	CursorMove -1 0

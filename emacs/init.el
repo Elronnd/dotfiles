@@ -6,7 +6,6 @@
 
 (use-package vterm :ensure t)
 (use-package slime :ensure t)
-(use-package magit :ensure t)
 (use-package d-mode :ensure t)
 (use-package evil :ensure t)
 (use-package rust-mode :ensure t)
@@ -17,9 +16,18 @@
 (load "mode-change-hooks")
 (load "key-binds")
 (load "colouration")
+(load "bufferstuff")
+
+(fringe-mode 0)
+(scroll-bar-mode 0)
+
+(global-visual-line-mode 1)
 
 (setq org-hide-emphasis-markers t)
 (setq inferior-lisp-program "/bin/sbcl")
+
+;; Stop modifying my damn config file.  Please.
+(setq custom-file "/dev/null")
 
 (setq backup-directory-alist `(("." . "~/.emacs-backups")))
 (setq backup-by-copying t)
