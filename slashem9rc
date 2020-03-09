@@ -1,0 +1,268 @@
+OPTIONS=!autopickup
+OPTIONS=pickup_burden:burdened
+OPTIONS=windowtype:tty
+OPTIONS=msg_window:single
+OPTIONS=graphics:utf8
+#OPTIONS=!perm_invent
+#OPTIONS=debug_fuzzer
+###############################################################################
+#                           _________________________                         #
+#		           //-----------------------\\                        #
+#                          ||                       ||                        #
+#                          ||  Elronnd's slashemrc  ||                        #
+#                          ||                       ||                        #
+#		           \\_______________________//                        #
+#                           \_______________________/                         #
+#                                                                             #
+#                                                                             #
+#                                                                             #
+#                                                                             #
+#     Here's my config file.  Hopefully everything is self-explanatory or     #
+#   explained.  If not, complain to me on any nethack-related freenode IRC    #
+#  channel.  Hopefully everything looks good, and can be copy-pasted in and   #
+#   easily changed to suit your preferences.  if not, once again, complain.   #
+#                                                                             #
+#####################################                                         #
+#                               Share and enjoy!                              #
+#                                           ###################################
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+## This is for the junethack nethack tourney, so my games can be counted.
+## It's pretty much a set-and-forget thing.
+# junethack Elronnd
+
+## If you don't like pets, enable this.  You can change it to "cat" or "dog"
+## on most roles.
+#OPTIONS=pettype:none
+
+OPTIONS=fruit:fungus
+OPTIONS=splash_screen
+
+OPTIONS=menu_glyphs
+
+
+### Just a bunch of random defaults that I like.
+## Time shows how many turns have accumulated.
+
+## Color is a must (otherwise NetHack is in black and white).
+
+## !autopickup means no autopickup.
+
+## !cmdassist means that if you give a non-valid direction to a directional
+## prompt, just say "What a strange direction" instead of a screen you have to 
+## type <space> to get out of.
+
+## Runmode:teleport means that if you travel using _, you'll get there
+## instantaneously (real-time).
+
+## showweight shows how much you're carrying, and can carry, in the status
+## line.  invweight shows how much things in your inventory weigh.
+
+## showscore approximates how much score you've accumulated so far
+
+## showdmg shows how much damage stuff deals
+
+## showexp shows how many experience points you've earned, next to your
+## experience level
+
+## nomenu_on_escape makes it so that the game doesn't show a menu
+## when you press the escape key.  Useful if you use that key to
+## quit out of messages.
+
+## disclose makes it so at the end of the game, it will automagically 
+## show you everything when you press space, you don't have to
+## press "y"
+OPTIONS=showexp,time,color,!cmdassist,runmode:teleport
+OPTIONS=showweight,invweight,showscore,showdmg,nomenu_on_esc
+OPTIONS=disclose:yi ya yv yg yc
+
+BINDINGS=^e:enhance,^o:offer,X:twoweapon
+
+OPTIONS=hilite_hidden_stairs,hilite_obj_piles
+
+
+## This makes it so that ghosts and shades will show up as "8" so you can
+## actually SEE them.
+#OPTIONS=monsters:abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@8'&;:~m
+
+## Dungeoncolors allows you to color various apects of the dungeon differently
+## than the defaults.  This is the only part of the config that is unique to me.
+## Currently disabled; this is a "NAO" feature only
+
+## Show lit squares in a corridor as a different color.
+OPTIONS=lit_corridor
+
+## If you're wielding a digging implement and move into solid rock, DIG.
+OPTIONS=autodig
+
+
+## Show "black" things as dark gray instead of blue (to differentiate from
+## Colored menus. Regular expressions allowed.
+OPTIONS=menucolors
+
+# BUC
+MENUCOLOR=" blessed "=green
+MENUCOLOR=" cursed "=red
+MENUCOLOR=" cursed .* (being worn)"=orange&underline
+
+# Spell failure rates.  Uncomment as a spell-casting role
+#MENUCOLOR=" 0%"=lightgreen," [1-9]%"=yellow," 1[0-9]%"=yellow," 2[0-4]%"=yellow
+#MENUCOLOR=" 2[5-9]%"=orange," [3-4][0-9]%"=orange," [5-9][0-9]%"=red
+#MENUCOLOR=" 100%"=lightmagenta
+
+# Water
+MENUCOLOR=" holy water"=cyan&bold
+MENUCOLOR=" blessed clear potion"=cyan&bold
+MENUCOLOR=" blessed potions? called water"=cyan&bold
+MENUCOLOR=" clear potions? named (holy|blessed|B)($| )"=cyan&bold
+MENUCOLOR=" potions? of water named (holy|blessed|B)($| )"=cyan&bold
+MENUCOLOR=" potions? called water named (holy|blessed|B)($| )"=cyan&bold
+MENUCOLOR=" unholy water"=orange
+MENUCOLOR=" cursed clear potion"=orange
+MENUCOLOR=" cursed potions? called water"=orange
+MENUCOLOR=" potions? called water named (unholy|cursed|C)($| )"=orange
+
+
+# Misc
+MENUCOLOR=" gold piece"=yellow
+MENUCOLOR=" load(stone)?($| )"=red&underline
+
+# Goodies
+MENUCOLOR=" bag .* holding"=magenta
+MENUCOLOR=" luck(stone)?($| )"=magenta
+MENUCOLOR=" wand .* wish(ing)?($| )"=magenta
+MENUCOLOR=" wand .* tele(port(ation)?)?($| )"=magenta
+MENUCOLOR=" wand .* polymorph"=magenta
+MENUCOLOR=" wand .* death"=magenta
+MENUCOLOR=" gain level"=magenta
+MENUCOLOR=" full healing"=magenta
+MENUCOLOR=" magic marker"=magenta
+MENUCOLOR=" magic lamp|lamp .* magic"=magenta
+MENUCOLOR=" unicorn horn[^[]*$"=magenta #this doesn't color the #enhance unicorn
+MENUCOLOR=" tinning kit"=magenta
+MENUCOLOR=" ring .* regen(eration)?($| )"=magenta
+MENUCOLOR=" ring .* conflict"=magenta
+MENUCOLOR=" ring .* (FA|free action)($| )"=magenta
+MENUCOLOR=" ring .* (TC|teleport control)($| )"=magenta
+MENUCOLOR=" ring .* lev(itation)?($| )"=magenta
+MENUCOLOR=" scrolls? .* genocide($| )"=magenta
+MENUCOLOR=" scrolls? .* charging($| )"=magenta
+MENUCOLOR=" scrolls? .* identify($| )"=magenta
+MENUCOLOR=" amulet .* (life ?saving|LS)($| )"=magenta
+MENUCOLOR=" amulet .* ref(lection)?($| )"=magenta
+MENUCOLOR=" c(o|hi)ckatrice (corpse|egg)"=magenta
+MENUCOLOR=" egg .* cockatrice"=magenta
+MENUCOLOR=" stethoscope"=magenta
+
+# Unidentified magic armour
+MENUCOLOR="piece of cloth|opera cloak|ornamental cope|tattered cape"=magenta
+MENUCOLOR="plumed helmet|etched helmet|crested helmet|visored helmet"=magenta
+MENUCOLOR="(old|padded|riding|fencing) gloves"=magenta
+MENUCOLOR="(mud|steel|riding|snow|hiking|combat|jungle) boots"=magenta
+
+# Identified magic armour -- A work in proggress
+MENUCOLOR="helm .* (elepath|ESP|pposite align|HoOA|rillianc) .*"=cyan
+MENUCOLOR="(gauntlets of|.*named) .* (exterity|ower)"=cyan
+#MENUCOLOR="?(auntlets of|.*named) .* fumbling"=red
+#MENUCOLOR="?(auntlets of|.*named) .* fumbling .* (being worn)"=red&underline
+MENUCOLOR=".*named fumble.*"=red
+MENUCOLOR=".*named fumble.*(being worn).*"=red&underline
+
+
+# Artifacts
+#unaligned
+MENUCOLOR=" (Dragonbane|Fire Brand|Frost Brand|Ogresmasher|Trollsbane|Werebane)"=lightgreen
+
+#lawful: normal, quest
+MENUCOLOR=" (Demonbane|Excalibur|Grayswandir|Snickersnee|Sunsword)"=lightgreen
+MENUCOLOR=" (Orb of Detection|Sceptre of Might|Magic Mirror of Merlin|Mitre of Holiness|Tsurugi of Muramasa)"=lightgreen
+
+#neutral: normal, quest
+MENUCOLOR=" (Cleaver|Giantslayer|Magicbane|Mjollnir|Vorpal Blade)"=lightgreen
+MENUCOLOR=" (Heart of Ahriman|Staff of Aesculapius|Eyes of the Overworld|Platinum Yendorian Express Card|Orb of Fate|Eye of the Aethiopica)"=lightgreen
+
+#chaotic: normal, quest
+MENUCOLOR=" (Grimtooth|Orcrist|Sting|Stormbringer)"=lightgreen
+MENUCOLOR=" (Longbow of Diana|Master Key of Thievery)"=lightgreen
+
+#invocation: items
+MENUCOLOR=" (Bell of Opening|silver bell|Candelabrum of Invocation|candelabrum|Book of the Dead|papyrus spellbook)"=magenta&bold
+
+#raison d'etre
+MENUCOLOR=" Amulet of Yendor named"=magenta&bold&underline
+
+# Cursed goodies
+MENUCOLOR=" cursed.* bag .* holding"=red&bold
+MENUCOLOR=" cursed.* luck(stone)?($| )"=red&bold
+MENUCOLOR=" cursed.* unicorn horn"=red&bold
+MENUCOLOR=" cursed.* (Bell of Opening|silver bell|Candelabrum of Invocation|candelabrum|Book of the Dead|papyrus spellbook)"=red&bold
+MENUCOLOR="cursed tins? .* spinach|tins? .* spinach .* (cursed|C($| ))"=red
+
+# Watch out, bag of holding
+MENUCOLOR=" bag .* tricks"=blue&underline
+MENUCOLOR=" wand .*[^!]canc"=blue&underline
+MENUCOLOR=" wand .* vanish"=blue&underline
+
+# Food: when you have a ton of food, it can get hard to distinguish
+MENUCOLOR="(food |cram |K-|C-)ration|gunyoki"=green&bold
+MENUCOLOR="lembas wafer|melon|carrot|tins? .* spinach"=green&bold
+MENUCOLOR=" oranges?( named.*)?$"=green&bold # avoid coloring orange DSM
+MENUCOLOR=" pears?( named.*)?$"=green&bold # avoid coloring pearl rings
+MENUCOLOR=" (apple|banana|kelp|eucalyptus|garlic|wolfsbane)"=green&bold
+MENUCOLOR=" slime mold "=green&bold
+MENUCOLOR="(tins? of )?(gelatinous cube|acid blob|quivering blob)( corpse)?"=green&bold
+MENUCOLOR="(tins? of )?(blue|spotted|ochre) jelly( corpse)?"=green&bold
+MENUCOLOR="(tins? of )?lichen|shrieker|violet fungus|(brown|yellow|green|red) mold( corpse)?"=green&bold 
+
+# Enhancing skill slots
+MENUCOLOR="^ +[a-z -]+ +\[(Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]$"=none           # normal
+MENUCOLOR="^ *[a-z] - +[a-z -]+ +\[(Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]$"=white # ready to enhance
+MENUCOLOR="^ +\* +[a-z -]+ +\[(Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]$"=white      # enhanceable if more skill slots
+MENUCOLOR="^ +# +[a-z -]+ +\[(Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]$"=none        # enhanceable if more potential
+
+
+MENUCOLOR=" lode(stone)?($| )"=red&underline
+
+# Fix ordinary menus
+MENUCOLOR=" is empty. Do what?"=none
+MENUCOLOR="Put something into .*"=none
+MENUCOLOR="Take something out of .*"=none
+MENUCOLOR="unicorn horn.*(Unskilled|Basic|Skilled|Expert)"=none
+MENUCOLOR="Info on what a given key does."=none
+MENUCOLOR="Full list of keyboard commands."=none
+MENUCOLOR="altkeyhandler"=none
+MENUCOLOR="fruit.*\["=none
+
+
+OPTIONS=statuscolors
+# I like to have it such that when everything's as %100, it's gray, so then
+## it's like "Okay, everything's the same, everything's fine", but many people
+## set it so that %100 is green.
+
+# HP
+STATUSCOLOR=hp%100=gray,hp%99=green,hp%66=yellow,hp%50=orange
+STATUSCOLOR=hp%33=red&bold,hp%15:red&inverse,hp%0:red&inverse&blink
+STATUSCOLOR=hp.1:red&inverse
+
+# Power: uncomment as a spell-caster.
+STATUSCOLOR=pw%100=gray,pw%66=gray,pw%50:gray,pw%33=gray
+STATUSCOLOR=pw%100=gray,pw%99=green,pw%66=yellow,pw%50=orange                   
+STATUSCOLOR=pw%33=red&bold,pw%15:red&inverse,pw%0:red&inverse&blink             
+
+# Carry
+STATUSCOLOR=burdened:yellow,stressed:orange,strained:red&bold
+STATUSCOLOR=overtaxed:red&inverse,overloaded:red&inverse&blink
+
+# Hunger
+STATUSCOLOR=satiated:yellow,hungry:orange,weak:red&bold
+STATUSCOLOR=fainting:red&inverse,fainted:red&inverse&blink
+
+# Mental
+STATUSCOLOR=hallu:yellow,conf:orange,stun:red&bold
+
+## Health
+STATUSCOLOR=ill:red&inverse,foodpois:red&inverse,slime:red&inverse
+
+STATUSCOLOR=lev:blue,blind:gray
