@@ -16,3 +16,5 @@ register B "^A:title "
 bind B process B
 password none
 setenv SCREEN_RUNNING 1
+maptimeout 0
+defc1 off

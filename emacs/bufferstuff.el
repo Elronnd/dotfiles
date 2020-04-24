@@ -8,7 +8,8 @@
 	(setq bs/started t)))
   (puthash
    key
-   (current-buffer)
+   (buffer-name)
+   ;(current-buffer)
    (gethash bs/current-table-name bs/buffer-table-table)))
 
 (defun bs/jump-to-buffer (key)

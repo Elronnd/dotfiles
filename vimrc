@@ -26,9 +26,9 @@ if dein#load_state('~/.vim/dein')
 endif
 
 " install not installed plugins on startup.
-"if dein#check_install()
-"	call dein#install()
-"endif
+if dein#check_install()
+	call dein#install()
+endif
 
 
 "call dein#add('tpope/vim-fugitive.git') " git support
@@ -55,6 +55,7 @@ colorscheme peachpuff
 " Zig is stupid and disallows '\t' as a character in source code
 au bufnewfile,bufread *.zig set shiftwidth=8 softtabstop=8 ",set noexpandtab
 au bufnewfile,bufread *.hs set shiftwidth=8 softtabstop=8 expandtab
+au bufnewfile,bufread *.txt set textwidth=78
 
 filetype plugin indent on
 set noexpandtab
@@ -81,7 +82,7 @@ cabbrev WN wn
 
 "autocmd BufNewFile,BufRead *.nim set tabstop=4 expandtab shiftwidth=4 softtabstop=4
 autocmd BufNewFile,BufRead *.h set ft=c
-autocmd BufNewFile,BufRead *.scm set tabstop=8 expandtab shiftwidth=8 softtabstop=8
+autocmd BufNewFile,BufRead *.scm,*.lisp,*.el set tabstop=8 expandtab shiftwidth=8 softtabstop=8
 
 
 " No autocomplete in .tex files because just no

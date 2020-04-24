@@ -9,7 +9,11 @@
 (use-package d-mode :ensure t)
 (use-package evil :ensure t)
 (use-package rust-mode :ensure t)
+
+(use-package rainbow-delimiters :ensure t)
 (require 'org)
+
+(evil-mode)
 
 (add-to-list 'load-path "~/emacs")
 (load "k-mode")
@@ -20,6 +24,9 @@
 
 (fringe-mode 0)
 (scroll-bar-mode 0)
+
+(setq show-paren-delay 0)
+(show-paren-mode 1)
 
 (global-visual-line-mode 1)
 

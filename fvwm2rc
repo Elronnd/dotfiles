@@ -150,21 +150,21 @@ AddToFunc "std_desktop" "I" GoToPage 3,1
 # This menu will fire up some very common utilities
 AddToMenu "Utilities"
 +		"xterm" Exec exec xterm -fa "DejaVu Sans Mono" -sb -sl 10000 -j -geom 80x25 -u8 -bg black -fg white -fs 10 +fbx
++		"gnome-terminal" Exec exec gnome-terminal
 +		"konsole" Exec exec konsole
 +		"" Nop
 +		"Firefox" Exec exec firefox
-#+		"Torbrowser" Exec exec tor-browser-en-us
 +		"Chrome" Exec exec google-chrome-stable
-+		"" Nop
-+		"Godot" Exec exec godot
-+		"Steam" Exec exec steam
-+		"OBS" Exec exec obs
-+		"" Nop
-+		"UNDERTALE" Exec exec wine /home/elronnd/UNDERTALE.exe
++		"qutebrowser" Exec exec qutebrowser
++		"Torbrowser" Exec exec torbrowser-launcher
 +		"" Nop
 +		"GIMP" Exec exec gimp
 +		"LibreOffice" Exec exec libreoffice
-+		"JDownloader2" Exec exec jdownloader
++		"Thunderbird" Exec exec thunderbird
++		"Ghidra" Exec exec ghidra
++		"" Nop
++		"Steam" Exec exec steam
++		"OBS" Exec exec obs
 +		"" Nop
 +		"EMACS" Exec exec emacs -mm -fs
 
@@ -311,7 +311,7 @@ Key F7 A A Exec exec xscreensaver-command -lock
 # Conflicts with VNC
 # Key F8 A A Exec exec xscreensaver-command -lock
 # Mac-like volume keys
-Key F10 A A Exec exec amixer sset Master toggle
+Key F10 A A Exec exec sh -c 'amixer sset Master toggle; amixer sset Headphone on; amixer sset Speaker on'
 Key F11 A N Exec exec amixer sset Master 5%-
 Key F12 A A Exec exec amixer sset Master 5%+
 

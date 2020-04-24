@@ -38,9 +38,11 @@ ms_ppt() {
 	wine OUTLOOK.EXE
 	popd
 }
-objdump() {
-	=objdump -M intel $@ | ddemangle
-}
+alias bc='bc -lq'
+alias objdump="objdump -M intel"
+#objdump() {
+#	=objdump -M intel $@ | ddemangle
+#}
 alias gl="googler --count 3 --noprompt"
 alias vi="vim"
 alias s="screen -d -rRU"
@@ -66,10 +68,12 @@ alias gdb="gdb -q"
 export XDG_RUNTIME_DIR=/tmp/runtime-elronnd
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
-export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
+#export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
+export QHOME=$HOME/.kdb
 #alias java="java -Dawt.useSystemAAFontSettings=on"
 #export QT_STYLE_OVERRIDE=adwaita-dark
-export PATH=$HOME/bin:$HOME/code/dmd/install/linux/bin64:$HOME/code/dmd/dub/bin:$HOME/code/dmd/install/bin:$HOME/.emacsinstall/bin:$HOME/.gdcinstall/bin:$HOME/.p6install/bin:$HOME/.p6install/share/perl6/site/bin:/bin:/usr/local/bin:/opt/texlive/2019/bin/x86_64-linux:$HOME/.cargo/bin:$HOME/.arcanstall/bin:/usr/local/Wolfram/WolframEngine/12.0/Executables:/usr/local/Wolfram/WolframEngine/12.0/SystemFiles/Kernel/Binaries/Linux-x86-64:$HOME/.winestall/bin:$HOME/games/bin:$HOME/.local/bin #:$HOME/.dyalog/opt/mdyalog/17.1/64/unicode/
+export PATH=$HOME/bin:$PATH:$HOME/.arcanstall/bin:$HOME/.rakudoinstall/bin:$HOME/.raku/bin:$HOME/exe/bin:/d/media/linux_games/bin:$HOME/.local/bin
+#export PATH=$HOME/bin:$HOME/code/dmd/install/linux/bin64:$HOME/code/dmd/dub/bin:$HOME/code/dmd/install/bin:$HOME/.emacsinstall/bin:$HOME/.gdcinstall/bin:$HOME/.p6install/bin:$HOME/.p6install/share/perl6/site/bin:/bin:/usr/local/bin:/opt/texlive/2019/bin/x86_64-linux:$HOME/.cargo/bin:$HOME/.arcanstall/bin:/usr/local/Wolfram/WolframEngine/12.0/Executables:/usr/local/Wolfram/WolframEngine/12.0/SystemFiles/Kernel/Binaries/Linux-x86-64:$HOME/.winestall/bin:$HOME/games/bin:$HOME/.local/bin #:$HOME/.dyalog/opt/mdyalog/17.1/64/unicode/
 
 export GOPATH="${HOME}/go"
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
@@ -103,17 +107,21 @@ fi
 PS2="%F{black}%B%_%f%F{green}%B>%f%b "
 zstyle ':completion:*' rehash true
 
-source $HOME/code/zshit/lambda.zsh
+#source $HOME/code/zshit/lambda.zsh
 
 setbg() {
 	echo -ne "\033]11;#$1\007"
 }
 
-lambda sansext=filename . 'sed "s/\(.*\)\..*$/\1/" <<< $filename'
+#lambda sansext=filename . 'sed "s/\(.*\)\..*$/\1/" <<< $filename'
 
 
 conwert() {
 	$@ | konwert cp437-utf8
+}
+
+em() {
+	DISPLAY= emacs $@
 }
 
 # it doesn't work for some reason
