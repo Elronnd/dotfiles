@@ -19,6 +19,9 @@ if dein#load_state('~/.vim/dein')
 	call dein#add('vim/killersheep')
 	call dein#add('itchyny/vim-haskell-indent')
 	"call dein#add('zxqfl/tabnine-vim')
+	"
+	"call dein#add('fsharp/vim-fsharp')
+	call dein#add('kongo2002/fsharp-vim')
 
 
 	call dein#end()
@@ -52,12 +55,15 @@ endif
 
 colorscheme peachpuff
 
+filetype plugin indent on
 " Zig is stupid and disallows '\t' as a character in source code
 au bufnewfile,bufread *.zig set shiftwidth=8 softtabstop=8 ",set noexpandtab
 au bufnewfile,bufread *.hs set shiftwidth=8 softtabstop=8 expandtab
-au bufnewfile,bufread *.txt set textwidth=78
-
-filetype plugin indent on
+au bufnewfile,bufread *.fs set shiftwidth=8 softtabstop=4 expandtab
+au bufnewfile,bufread *.rs set shiftwidth=8 tabstop=8 noexpandtab
+au bufnewfile,bufread *.tex filetype plugin indent off
+"au bufnewfile,bufread *.txt set textwidth=78
+"
 set noexpandtab
 set hlsearch
 

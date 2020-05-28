@@ -9,6 +9,7 @@
 (use-package d-mode :ensure t)
 (use-package evil :ensure t)
 (use-package rust-mode :ensure t)
+;(use-package fsharp-mode :ensure t)
 
 (use-package rainbow-delimiters :ensure t)
 (require 'org)

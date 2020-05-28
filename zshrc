@@ -39,10 +39,15 @@ ms_ppt() {
 	popd
 }
 alias bc='bc -lq'
+alias xpdf="xpdf -z width"
+alias python='python -q'
+alias sbcl='rlwrap sbcl --noinform'
 alias objdump="objdump -M intel"
-#objdump() {
-#	=objdump -M intel $@ | ddemangle
-#}
+
+# objdump() {
+# 	=objdump -M intel $@ | ddemangle
+# }
+
 alias gl="googler --count 3 --noprompt"
 alias vi="vim"
 alias s="screen -d -rRU"
@@ -143,7 +148,7 @@ zippy() {
 encrypt() {
 	local INFILE=$1
 	local OUTFILE=$1.enc
-	openssl aes-256-cbc -salt -in $INFILE -out $OUTFILE && rm $INFILE
+	openssl aes-256-cbc -salt -pbkdf2 -iter 100000 -md sha512 -in $INFILE -out $OUTFILE && rm -f $INFILE
 }
 decrypt() {
 	local INFILE=$1
@@ -160,27 +165,26 @@ decrypt() {
 		OUTFILE=$INFILE.decrypted
 	fi
 
-	openssl aes-256-cbc -d -salt -in $INFILE -out $OUTFILE
+	openssl aes-256-cbc -d -salt -pbkdf2 -iter 100000 -md sha512 -in $INFILE -out $OUTFILE
 }
-redundant() {
-	if [[ $# = 0 ]]; then
-		echo "Error: need a file"
-		return 1
-	fi
+decview() {
+	local INFILE=$1
 
-	local file=$1
-
-	if [[ $# = 1 ]]; then
-		number=16
+	openssl aes-256-cbc -d -salt -pbkdf2 -iter 100000 -md sha512 -in $INFILE | less
+}
+decdit() {
+	local FILE=$1
+	# TODO: preserve file extension in $tmpfile
+	local tmpfile=$(mktemp)
+	openssl aes-256-cbc -d -salt -pbkdf2 -iter 100000 -md sha512 -in $FILE -out $tmpfile
+	moddate=$(date +%s -r $tmpfile)
+	$EDITOR $tmpfile
+	nmoddate=$(date +%s -r $tmpfile)
+	if [[ $moddate != $nmoddate ]]; then
+		openssl aes-256-cbc -salt -pbkdf2 -iter 100000 -md sha512 -in $tmpfile -out $FILE && rm -f $tmpfile
 	else
-		number=$2
+		rm -f $tmpfile
 	fi
-	lennum=${#number}
-
-	for copy in {1..$number}; do
-		actualcopy=$(printf "%0${lennum}d" $copy)
-		cp ${file} ${file}.${actualcopy}
-	done
 }
 clc() {
 	sbcl --no-userinit --load $1 --eval "(sb-ext:save-lisp-and-die \"$(sansext $1)\" :toplevel 'main :executable t)"
@@ -221,7 +225,7 @@ winef() {
 
 alarm() {
 	_do_alarm() {
-		local brightness=$(xbacklight)
+		local brightness=$(xbacklight -get)
 		# if the screen is dim, briefly brighten it, otherwise do the other way around
 		if [[ $brightness -lt 50 ]]; then
 			xbacklight -set 100 -steps 1 -time 0
