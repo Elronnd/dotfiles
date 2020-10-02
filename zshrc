@@ -15,32 +15,19 @@ fi
 
 if [[ $(uname) = Linux ]]; then
 	alias ls="ls -F --color=auto"
+	export PATH=$HOME/bin/l:$PATH
 elif [[ $(uname) = OpenBSD ]]; then
 	alias ls="colorls -FG"
-else
+elif [[ $(uname) = FreeBSD ]]; then
+	export PATH=$HOME/bin/f:$PATH
+	export JAVA_VERSION=15
 	alias ls="ls -FG"
+	export CMAKE_PREFIX_PATH=/usr/local/llvm10 #ceeeeeeeeeeeeeeeeeeemake
 fi
-ms_excel() {
-	winef office
-	pushd ~/.cxoffice/Microsoft_Office_365/drive_c/Program\ Files/Microsoft\ Office/root/Office16/
-	wine EXCEL.EXE
-	popd
-}
-ms_word() {
-	winef office
-	pushd ~/.cxoffice/Microsoft_Office_365/drive_c/Program\ Files/Microsoft\ Office/root/Office16/
-	wine WINWORD.EXE
-	popd
-}
-ms_ppt() {
-	winef office
-	pushd ~/.cxoffice/Microsoft_Office_365/drive_c/Program\ Files/Microsoft\ Office/root/Office16/
-	wine OUTLOOK.EXE
-	popd
-}
 alias bc='bc -lq'
 alias xpdf="xpdf -z width"
 alias python='python -q'
+alias octave="octave -q"
 alias sbcl='rlwrap sbcl --noinform'
 alias objdump="objdump -M intel"
 
@@ -48,58 +35,43 @@ alias objdump="objdump -M intel"
 # 	=objdump -M intel $@ | ddemangle
 # }
 
-alias gl="googler --count 3 --noprompt"
 alias vi="vim"
 alias s="screen -d -rRU"
 alias mpl="mpv --no-audio-display --no-video"
 alias rm="rm -i"
+alias mv="mv -i"
+alias cp="cp -i"
 alias clip="xsel -i -b"
 alias paste="upload 0x0"
 alias load="upload catbox"
 alias sprunge="upload sprunge"
 alias ix="upload ix"
 alias hate="upload haste"
-alias timer="xterm -cr '#010000' -fa 'DejaVu Sans Mono' -geom 8x1 -bg black -fg white -fs 10 -e 'perl6 timer.p6'"
-alias bat="bat --theme peachpuff -p"
 alias gdb="gdb -q"
-#if [[ -v WSL ]]; then
-#	alias wig=git.exe
-#	alias dub=dub.exe
-#	alias dmd=dmd.exe
-#	alias rdmd=rdmd.exe
-#fi
 
 # Make Qt applications shut up
-export XDG_RUNTIME_DIR=/tmp/runtime-elronnd
+export XDG_RUNTIME_DIR=/tmp/runtime-mc
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 #export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
 export QHOME=$HOME/.kdb
 #alias java="java -Dawt.useSystemAAFontSettings=on"
 #export QT_STYLE_OVERRIDE=adwaita-dark
-export PATH=$HOME/bin:$PATH:$HOME/.arcanstall/bin:$HOME/.rakudoinstall/bin:$HOME/.raku/bin:$HOME/exe/bin:/d/media/linux_games/bin:$HOME/.local/bin
+PATH=$HOME/bin:$PATH:$HOME/.arcanstall/bin:$HOME/.rakudoinstall/bin:$HOME/.raku/bin:$HOME/exe/bin:/d/media/linux_apps/bin:/d/media/linux_games/bin:$HOME/.local/bin:$HOME/.fbsdd/ldc2/bin
 #export PATH=$HOME/bin:$HOME/code/dmd/install/linux/bin64:$HOME/code/dmd/dub/bin:$HOME/code/dmd/install/bin:$HOME/.emacsinstall/bin:$HOME/.gdcinstall/bin:$HOME/.p6install/bin:$HOME/.p6install/share/perl6/site/bin:/bin:/usr/local/bin:/opt/texlive/2019/bin/x86_64-linux:$HOME/.cargo/bin:$HOME/.arcanstall/bin:/usr/local/Wolfram/WolframEngine/12.0/Executables:/usr/local/Wolfram/WolframEngine/12.0/SystemFiles/Kernel/Binaries/Linux-x86-64:$HOME/.winestall/bin:$HOME/games/bin:$HOME/.local/bin #:$HOME/.dyalog/opt/mdyalog/17.1/64/unicode/
 
 export GOPATH="${HOME}/go"
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
-export MANPATH=/usr/share/man:/opt/texlive/2019/texmf-dist/doc/man
+#export MANPATH=/usr/share/man:/opt/texlive/2019/texmf-dist/doc/man
 export EDITOR=vim
 set -o emacs
 #export DISPLAY=:0
 export MANPAGER="less"
 export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
+export DYALOG_LINEEDITOR_MODE=1
 
 autoload -U colors && colors
 autoload compinit && compinit
-
-new_kern() {
-	local running=${$(uname -r)//-ARCH/}
-	local installed=${${$(pacman -Q linux)//linux}// /} # don't worry about it
-	if [[ $running = $installed ]]; then
-	else
-		echo "(%F{yellow}*%f) "
-	fi
-}
 
 #Bold cyan; hostname; normal; cwd; red; normal
 PROMPT="%F{cyan}%B""%m""%f%b""%d-""%F{red}""%h""%f: "
@@ -141,50 +113,56 @@ em() {
 #	clip <<< $foo
 #	echo $foo
 #}
-zippy() {
-	curl -F"fupload=@$1" -F"private=yes" http://www4.zippyshare.com/upload 2>&1 | grep 'http\:\/\/www4\.zippyshare\.com\/v\/.*\/file\.htm' | tail +3 | head -1
-}
 
 encrypt() {
-	local INFILE=$1
-	local OUTFILE=$1.enc
-	openssl aes-256-cbc -salt -pbkdf2 -iter 100000 -md sha512 -in $INFILE -out $OUTFILE && rm -f $INFILE
+	local INFILE="$1"
+	local OUTFILE="$1.enc"
+	openssl aes-256-cbc -salt -pbkdf2 -iter 100000 -md sha512 -in "$INFILE" -out "$OUTFILE" && rm -f "$INFILE"
 }
 decrypt() {
-	local INFILE=$1
+	local INFILE="$1"
 
 	# for 'foo.bla.bar.baz.enc.oopsanotherextension'
 	# Grab 'foo.bla.bar.baz.enc', '.', and 'oopsanotherextension'
 	# and replace with 'foo.bla.bar.baz.enc'
-	local OUTFILE=$(sed 's/\(.*\)\..*$/\1/' <<< $INFILE)
+	local OUTFILE="$(sed 's/\(.*\)\..*$/\1/' <<< "$INFILE")"
 
 	# But if it's just 'fooblabarbaz', then there's nothing after the '.'
 	# to take away, so in = out = 'fooblabarbaz', which openssl won't like.
 	# So if they're the same, then add a '.decrypted' sufix
-	if [[ $INFILE = $OUTFILE ]]; then
-		OUTFILE=$INFILE.decrypted
+	if [[ "$INFILE" = "$OUTFILE" ]]; then
+		OUTFILE="$INFILE.decrypted"
 	fi
 
-	openssl aes-256-cbc -d -salt -pbkdf2 -iter 100000 -md sha512 -in $INFILE -out $OUTFILE
+	openssl aes-256-cbc -d -salt -pbkdf2 -iter 100000 -md sha512 -in "$INFILE" -out "$OUTFILE"
 }
 decview() {
-	local INFILE=$1
+	local INFILE="$1"
 
-	openssl aes-256-cbc -d -salt -pbkdf2 -iter 100000 -md sha512 -in $INFILE | less
+	openssl aes-256-cbc -d -salt -pbkdf2 -iter 100000 -md sha512 -in "$INFILE" | less
 }
 decdit() {
-	local FILE=$1
+	local FILE="$1"
 	# TODO: preserve file extension in $tmpfile
 	local tmpfile=$(mktemp)
-	openssl aes-256-cbc -d -salt -pbkdf2 -iter 100000 -md sha512 -in $FILE -out $tmpfile
-	moddate=$(date +%s -r $tmpfile)
-	$EDITOR $tmpfile
-	nmoddate=$(date +%s -r $tmpfile)
+	local pw
+	printf " "; read -s pw
+	openssl aes-256-cbc -d -salt -pbkdf2 -iter 100000 -md sha512 -in "$FILE" -out $tmpfile -pass fd:3 3<<< "$pw" || { echo "bad pw"; return 1 }
+	moddate=$(date -r $tmpfile +%s)
+	vim $EFLAGS $tmpfile
+	nmoddate=$(date -r $tmpfile +%s)
 	if [[ $moddate != $nmoddate ]]; then
-		openssl aes-256-cbc -salt -pbkdf2 -iter 100000 -md sha512 -in $tmpfile -out $FILE && rm -f $tmpfile
+		openssl aes-256-cbc -salt -pbkdf2 -iter 100000 -md sha512 -in $tmpfile -out "$FILE" -pass fd:3 3<<< "$pw" && rm -f $tmpfile
 	else
 		rm -f $tmpfile
 	fi
+}
+diary() {
+	export EFLAGS=(-c "normal!O$(date +%Y-%m-%d)
+
+
+" -c normal!kO +star)
+	decdit /d/diary.txt.enc
 }
 clc() {
 	sbcl --no-userinit --load $1 --eval "(sb-ext:save-lisp-and-die \"$(sansext $1)\" :toplevel 'main :executable t)"
@@ -225,34 +203,27 @@ winef() {
 
 alarm() {
 	_do_alarm() {
-		local brightness=$(xbacklight -get)
+		local brightness=$(light)
 		# if the screen is dim, briefly brighten it, otherwise do the other way around
 		if [[ $brightness -lt 50 ]]; then
-			xbacklight -set 100 -steps 1 -time 0
+			light 100
 		else
-			xbacklight -set 1 -steps 1 -time 0
+			light 1
 		fi
 
 		sleep .06
 
 		# restore the previous brightness
-		xbacklight -set $brightness -steps 1 -time 0
+		light $brightness
 	}
 
 	$@
 	_do_alarm
 }
 
+timer() {
+	for i in {$1..1}; do printf "\r%${#1}d" $i; sleep 1; done
+	echo "\r$1 seconds - done!"
+}
 
-
-
-#eval $(thefuck --alias)
-
-#. /etc/profile.d/emscripten.sh
 . ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-PATH="/home/elronnd/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/elronnd/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/elronnd/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/elronnd/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/elronnd/perl5"; export PERL_MM_OPT;

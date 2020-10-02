@@ -1,3 +1,4 @@
+(setq comp-deferred-compilation t)
 (fringe-mode 0)
 (scroll-bar-mode 0)
 

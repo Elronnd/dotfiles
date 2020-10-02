@@ -311,12 +311,10 @@ Key F6		A	M	Exec exec screenshot
 # Conflicts with alsamixer
 # Key F6 A A Exec	exec xrandr -s 0 &
 Key F7 A M Exec exec xscreensaver-command -lock
-# Conflicts with VNC
-# Key F8 A A Exec exec xscreensaver-command -lock
-# Mac-like volume keys
-Key F10 A M Exec exec sh -c 'amixer sset Master toggle; amixer sset Headphone on; amixer sset Speaker on'
-Key F11 A M Exec exec amixer sset Master 5%-
-Key F12 A M Exec exec amixer sset Master 5%+
+
+Key F10 A M Exec exec mix toggle
+Key F11 A M Exec exec mix quieter
+Key F12 A M Exec exec mix louder
 
 
 #Page Up/Dapge Down keys are used to scroll by one desktop page

@@ -27,4 +27,4 @@
 ;(add-hook 'buffer-list-update-hook
 ;	  (lambda ()
 ;	    (evil-mode
-;	      (if (equal major-mode 'vterm-mode) 0 1))))
+;	     (if (equal major-mode 'vterm-mode) 0 1))))

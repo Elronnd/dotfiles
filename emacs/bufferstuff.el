@@ -1,11 +1,10 @@
-(setq bs/buffer-table-table (make-hash-table))
+(setq bs/buffer-table-table (make-hash-table :test 'equal))
 (setq bs/started nil)
 
 (defun bs/write-current-buffer (key)
-  (if (not bs/started)
-      (progn
-	(bs/switch-workspace)
-	(setq bs/started t)))
+  (unless bs/started
+    (bs/switch-workspace)
+    (setq bs/started t))
   (puthash
    key
    (buffer-name)
@@ -13,13 +12,13 @@
    (gethash bs/current-table-name bs/buffer-table-table)))
 
 (defun bs/jump-to-buffer (key)
-  (if (not bs/started)
-      (progn
-	(bs/switch-workspace)
-	(setq bs/started t)))
-  (switch-to-buffer
-   (gethash key
-	    (gethash bs/current-table-name bs/buffer-table-table))))
+  (unless bs/started
+    (bs/switch-workspace)
+    (setq bs/started t))
+  (let ((key (gethash key
+		      (gethash bs/current-table-name bs/buffer-table-table))))
+    (switch-to-buffer key)
+    ))
 
 (defun bs/switch-workspace ()
   (interactive)
@@ -28,7 +27,7 @@
     (let ((new-ws (completing-read "Workspace: " cur-ws)))
       (if (null (gethash new-ws bs/buffer-table-table))
 	  (puthash new-ws
-		   (make-hash-table)
+		   (make-hash-table :test 'equal)
 		   bs/buffer-table-table)
 	0)
       (setq bs/current-table-name new-ws))))
