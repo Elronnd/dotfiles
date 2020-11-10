@@ -72,7 +72,7 @@
 (global-visual-line-mode 1)
 
 (setq org-hide-emphasis-markers t)
-(setq inferior-lisp-program "/bin/sbcl")
+(setq inferior-lisp-program "/usr/local/bin/sbcl")
 
 ;; Stop modifying my damn config file.  Please.
 (setq custom-file "/dev/null")

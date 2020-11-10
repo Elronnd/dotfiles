@@ -6,6 +6,7 @@ if dein#load_state('~/.vim/dein')
        call dein#begin('~/.vim/dein')
        call dein#add('~/.vim/dein/repos/github.com/Shougo/dein.vim')
        call dein#add('rhysd/vim-llvm')
+       call dein#add('vmchale/ats-vim')
        call dein#end()
        call dein#save_state()
 endif
@@ -31,13 +32,17 @@ au bufnewfile,bufread *.fs set shiftwidth=8 softtabstop=4 expandtab
 au bufnewfile,bufread *.rs set shiftwidth=8 tabstop=8 noexpandtab
 au bufnewfile,bufread *.tex filetype plugin indent off
 au bufnewfile,bufread *.mofl set ft=mofl
+au bufnewfile,bufread *.clht set ft=clht
 au bufnewfile,bufread fancy.build set ft=lisp
+au bufnewfile,bufread *.asd set ft=lisp
 "au bufnewfile,bufread *.c,*.h set ft=aplc
 "autocmd BufNewFile,BufRead *.nim set tabstop=4 expandtab shiftwidth=4 softtabstop=4
-"autocmd bufnewfile,bufread *.h set ft=c
-autocmd bufnewfile,bufread *.scm,*.lisp,*.el set tabstop=8 expandtab shiftwidth=8 softtabstop=8
+au bufnewfile,bufread *.h set ft=c
+autocmd bufnewfile,bufread *.scm,*.lisp,*.el,*.clht set tabstop=1 expandtab shiftwidth=1 softtabstop=1
 " No autocomplete in .tex files because just no
 autocmd bufnewfile,bufread *.tex let g:ycm_auto_trigger=0
+
+let g:c_no_curly_error = 1
 
 set noexpandtab
 set hlsearch
@@ -86,6 +91,12 @@ if $SCREEN_RUNNING
 	" reset title to zsh upon exiting
 	" so it doesn't get set to 'thanks for flying vim'
 	auto VimLeave * :set t_ts=kzsh\
+endif
+
+if !empty($TMUX)
+	call system('tmux rename-window ' . expand('%:t'))
+	"TODO stash old win name
+	"run tmux display-message -p '#W'
 endif
 
 let &titlestring = expand("%:t")

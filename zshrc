@@ -24,6 +24,7 @@ elif [[ $(uname) = FreeBSD ]]; then
 	alias ls="ls -FG"
 	export CMAKE_PREFIX_PATH=/usr/local/llvm10 #ceeeeeeeeeeeeeeeeeeemake
 fi
+alias youtube-dl="youtube-dl --all-subs"
 alias bc='bc -lq'
 alias xpdf="xpdf -z width"
 alias python='python -q'
@@ -42,6 +43,7 @@ alias rm="rm -i"
 alias mv="mv -i"
 alias cp="cp -i"
 alias clip="xsel -i -b"
+alias unclip="xsel -o"
 alias paste="upload 0x0"
 alias load="upload catbox"
 alias sprunge="upload sprunge"
@@ -57,7 +59,8 @@ export LC_ALL="en_US.UTF-8"
 export QHOME=$HOME/.kdb
 #alias java="java -Dawt.useSystemAAFontSettings=on"
 #export QT_STYLE_OVERRIDE=adwaita-dark
-PATH=$HOME/bin:$PATH:$HOME/.arcanstall/bin:$HOME/.rakudoinstall/bin:$HOME/.raku/bin:$HOME/exe/bin:/d/media/linux_apps/bin:/d/media/linux_games/bin:$HOME/.local/bin:$HOME/.fbsdd/ldc2/bin
+PATH="$HOME/bin:/usr/local/bin:$PATH:$HOME/.arcanstall/bin:$HOME/.rakudoinstall/bin:$HOME/.raku/bin:$HOME/exe/bin:/d/media/linux_apps/bin:/d/media/linux_games/bin:$HOME/.local/bin:$HOME/.fbsdd/dmd2/freebsd/bin64"
+#PATH="$HOME/bin:/bin:/usr/local/bin:/usr/bin:$HOME/.arcanstall/bin:$HOME/.rakudoinstall/bin:$HOME/.raku/bin:$HOME/exe/bin:/d/media/linux_apps/bin:/d/media/linux_games/bin:$HOME/.local/bin:$HOME/.fbsdd/dmd2/freebsd/bin64"
 #export PATH=$HOME/bin:$HOME/code/dmd/install/linux/bin64:$HOME/code/dmd/dub/bin:$HOME/code/dmd/install/bin:$HOME/.emacsinstall/bin:$HOME/.gdcinstall/bin:$HOME/.p6install/bin:$HOME/.p6install/share/perl6/site/bin:/bin:/usr/local/bin:/opt/texlive/2019/bin/x86_64-linux:$HOME/.cargo/bin:$HOME/.arcanstall/bin:/usr/local/Wolfram/WolframEngine/12.0/Executables:/usr/local/Wolfram/WolframEngine/12.0/SystemFiles/Kernel/Binaries/Linux-x86-64:$HOME/.winestall/bin:$HOME/games/bin:$HOME/.local/bin #:$HOME/.dyalog/opt/mdyalog/17.1/64/unicode/
 
 export GOPATH="${HOME}/go"
@@ -158,7 +161,7 @@ decdit() {
 	fi
 }
 diary() {
-	export EFLAGS=(-c "normal!O$(date +%Y-%m-%d)
+	export EFLAGS=(-c "normal!O$(date "+%Y-%m-%d (%A)")
 
 
 " -c normal!kO +star)
@@ -225,5 +228,11 @@ timer() {
 	for i in {$1..1}; do printf "\r%${#1}d" $i; sleep 1; done
 	echo "\r$1 seconds - done!"
 }
+
+PATH="/home/mc/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/mc/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/mc/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/mc/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/mc/perl5"; export PERL_MM_OPT;
 
 . ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
