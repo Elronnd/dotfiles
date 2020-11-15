@@ -23,6 +23,8 @@ elif [[ $(uname) = FreeBSD ]]; then
 	export JAVA_VERSION=15
 	alias ls="ls -FG"
 	export CMAKE_PREFIX_PATH=/usr/local/llvm10 #ceeeeeeeeeeeeeeeeeeemake
+	# Make Qt applications shut up
+	export XDG_RUNTIME_DIR=/tmp/runtime-mc
 fi
 alias youtube-dl="youtube-dl --all-subs"
 alias bc='bc -lq'
@@ -51,8 +53,6 @@ alias ix="upload ix"
 alias hate="upload haste"
 alias gdb="gdb -q"
 
-# Make Qt applications shut up
-export XDG_RUNTIME_DIR=/tmp/runtime-mc
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 #export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
