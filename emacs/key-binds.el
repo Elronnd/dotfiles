@@ -9,6 +9,8 @@
 
  ("<end>" . company-complete)
 
+ ("C-c C-b" . compile)
+
  ("C-1" . bs/write-current-buffer1)
  ("C-2" . bs/write-current-buffer2)
  ("C-3" . bs/write-current-buffer3)

@@ -21,11 +21,15 @@
 	  smart-tabs-mode
 	  rainbow-delimiters
           cc-mode
-	  org))
+	  org
+	  magit
+	  undo-tree))
 
 ;(electric-pair-mode)
+(global-undo-tree-mode)
 (global-eldoc-mode)
 (evil-mode)
+(evil-set-undo-system 'undo-tree)
 (projectile-mode)
 
 (add-to-list 'load-path "~/emacs")
@@ -72,7 +76,7 @@
 (global-visual-line-mode 1)
 
 (setq org-hide-emphasis-markers t)
-(setq inferior-lisp-program "/usr/local/bin/sbcl")
+(setq inferior-lisp-program "/usr/bin/sbcl")
 
 ;; Stop modifying my damn config file.  Please.
 (setq custom-file "/dev/null")

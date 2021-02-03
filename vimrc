@@ -1,20 +1,20 @@
 set nocompatible
 
-set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
+"set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
-if dein#load_state('~/.vim/dein')
-       call dein#begin('~/.vim/dein')
-       call dein#add('~/.vim/dein/repos/github.com/Shougo/dein.vim')
-       call dein#add('rhysd/vim-llvm')
-       call dein#add('vmchale/ats-vim')
-       call dein#end()
-       call dein#save_state()
-endif
-
-" install not installed plugins on startup.
-if dein#check_install()
-	call dein#install()
-endif
+"if dein#load_state('~/.vim/dein')
+"       call dein#begin('~/.vim/dein')
+"       call dein#add('~/.vim/dein/repos/github.com/Shougo/dein.vim')
+"       call dein#add('rhysd/vim-llvm')
+"       call dein#add('vmchale/ats-vim')
+"       call dein#end()
+"       call dein#save_state()
+"endif
+"
+"" install not installed plugins on startup.
+"if dein#check_install()
+"	call dein#install()
+"endif
 
 
 
@@ -38,7 +38,7 @@ au bufnewfile,bufread *.asd set ft=lisp
 "au bufnewfile,bufread *.c,*.h set ft=aplc
 "autocmd BufNewFile,BufRead *.nim set tabstop=4 expandtab shiftwidth=4 softtabstop=4
 au bufnewfile,bufread *.h set ft=c
-autocmd bufnewfile,bufread *.scm,*.lisp,*.el,*.clht set tabstop=1 expandtab shiftwidth=1 softtabstop=1
+autocmd bufnewfile,bufread *.scm,*.lisp,*.el,*.clht,fancy.build set tabstop=1 expandtab shiftwidth=1 softtabstop=1
 " No autocomplete in .tex files because just no
 autocmd bufnewfile,bufread *.tex let g:ycm_auto_trigger=0
 

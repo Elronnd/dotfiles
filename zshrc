@@ -26,6 +26,8 @@ elif [[ $(uname) = FreeBSD ]]; then
 	# Make Qt applications shut up
 	export XDG_RUNTIME_DIR=/tmp/runtime-mc
 fi
+export WINEESYNC=1
+export WINEFSYNC=1
 alias youtube-dl="youtube-dl --all-subs"
 alias bc='bc -lq'
 alias xpdf="xpdf -z width"
@@ -33,6 +35,8 @@ alias python='python -q'
 alias octave="octave -q"
 alias sbcl='rlwrap sbcl --noinform'
 alias objdump="objdump -M intel"
+alias ndsm="ndisasm -b 64"
+alias obdsm="objdump -b binary -Mintel,x86-64 -mi386 -D"
 
 # objdump() {
 # 	=objdump -M intel $@ | ddemangle
@@ -168,16 +172,24 @@ diary() {
 	decdit /d/diary.txt.enc
 }
 clc() {
-	sbcl --no-userinit --load $1 --eval "(sb-ext:save-lisp-and-die \"$(sansext $1)\" :toplevel 'main :executable t)"
+	sbcl --no-userinit --eval "(load (compile-file \"$1\"))" --eval "(sb-ext:save-lisp-and-die \"$2\" :toplevel (lambda () (main sb-ext:*posix-argv*)) :executable t)"
 }
 
 winef() {
 	local _winef_dict=(
-	fnv .wine-fnv 64
-	gog .wine-gog 64
-	office .cxoffice/Microsoft_Office_365 32
-	witness .wineness 64
+	tw3 .wine-tw3 64
+	ow .wine-ow 64
+	wiiusb .wine-wiiusb 32
+	cemu .wine-cemu 64
+	rdr2 .wine-rdr2 64
+	ds .wine-ds 64
 	)
+
+	if [[ -z $1 ]]; then
+		echo WINEPREFIX="$WINEPREFIX"
+		echo WINEARCH="$WINEARCH"
+		return
+	fi
 
 	found=false
 	for key dir arch in $_winef_dict; do
@@ -197,6 +209,8 @@ winef() {
 	#	return
 	#fi
 	#export WINEPREFIX=$(readlink -f "$dir")
+	echo export WINEPREFIX="$HOME/$dir"
+	echo export WINEARCH=win$arch
 	export WINEPREFIX="$HOME/$dir"
 	export WINEARCH=win$arch
 	if [[ $key = office ]]; then
