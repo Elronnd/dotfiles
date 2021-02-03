@@ -1,0 +1,38 @@
+#!/bin/sh
+
+# toggle on pulse/linux needs below nonsense
+# amixer sset Headphone on; amixer sset Speaker on
+
+if [ $(uname) = Linux ]; then
+	# pulse
+	if pamixer --list-sinks; then
+		case $1 in
+			louder) pamixer -i 5 ;;
+			quieter) pamixer -d 5 ;;
+			toggle) pamixer -t ;;
+		esac
+	# alsa
+	else
+		speaker=Speaker
+		export ALSA_CARD=PCH
+		case $1 in
+			louder) amixer sset $speaker 5%+ ;;
+			quieter) amixer sset $speaker 5%- ;;
+			toggle) amixer sset $speaker toggle ;;
+		esac
+	fi
+fi
+
+if [ $(uname) = FreeBSD ]; then
+	case $1 in
+		louder) mixer vol +5 ;;
+		quieter) mixer vol -5 ;;
+		toggle)
+			if [ $(mixer pcm|awk '{print $NF}') = 100:100 ]; then
+				mixer pcm 0
+			else
+				mixer pcm 100
+			fi
+			;;
+	esac
+fi

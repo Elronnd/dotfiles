@@ -63,7 +63,7 @@ export LC_ALL="en_US.UTF-8"
 export QHOME=$HOME/.kdb
 #alias java="java -Dawt.useSystemAAFontSettings=on"
 #export QT_STYLE_OVERRIDE=adwaita-dark
-PATH="$HOME/bin:/usr/local/bin:$PATH:$HOME/.arcanstall/bin:$HOME/.rakudoinstall/bin:$HOME/.raku/bin:$HOME/exe/bin:/d/media/linux_apps/bin:/d/media/linux_games/bin:$HOME/.local/bin:$HOME/.fbsdd/dmd2/freebsd/bin64"
+PATH="$HOME/bin:$HOME/.dotfiles/bin:/usr/local/bin:$PATH:$HOME/.arcanstall/bin:$HOME/.rakudoinstall/bin:$HOME/.raku/bin:$HOME/exe/bin:/d/media/linux_apps/bin:/d/media/linux_games/bin:$HOME/.local/bin:$HOME/.fbsdd/dmd2/freebsd/bin64"
 #PATH="$HOME/bin:/bin:/usr/local/bin:/usr/bin:$HOME/.arcanstall/bin:$HOME/.rakudoinstall/bin:$HOME/.raku/bin:$HOME/exe/bin:/d/media/linux_apps/bin:/d/media/linux_games/bin:$HOME/.local/bin:$HOME/.fbsdd/dmd2/freebsd/bin64"
 #export PATH=$HOME/bin:$HOME/code/dmd/install/linux/bin64:$HOME/code/dmd/dub/bin:$HOME/code/dmd/install/bin:$HOME/.emacsinstall/bin:$HOME/.gdcinstall/bin:$HOME/.p6install/bin:$HOME/.p6install/share/perl6/site/bin:/bin:/usr/local/bin:/opt/texlive/2019/bin/x86_64-linux:$HOME/.cargo/bin:$HOME/.arcanstall/bin:/usr/local/Wolfram/WolframEngine/12.0/Executables:/usr/local/Wolfram/WolframEngine/12.0/SystemFiles/Kernel/Binaries/Linux-x86-64:$HOME/.winestall/bin:$HOME/games/bin:$HOME/.local/bin #:$HOME/.dyalog/opt/mdyalog/17.1/64/unicode/
 

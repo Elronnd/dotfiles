@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+"$@" &
+pid=$!
+while kill -0 $pid 2>/dev/null; do
+	xscreensaver-command -deactivate >/dev/null
+	sleep 300&
+	wait -n
+done
