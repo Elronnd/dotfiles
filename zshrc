@@ -76,6 +76,7 @@ set -o emacs
 export MANPAGER="less"
 export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
 export DYALOG_LINEEDITOR_MODE=1
+export DEFAULT_IO=1
 
 autoload -U colors && colors
 autoload compinit && compinit
