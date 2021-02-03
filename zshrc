@@ -146,7 +146,7 @@ decrypt() {
 decview() {
 	local INFILE="$1"
 
-	openssl aes-256-cbc -d -salt -pbkdf2 -iter 100000 -md sha512 -in "$INFILE" | less
+	(sleep 0.05; openssl aes-256-cbc -d -salt -pbkdf2 -iter 100000 -md sha512 -in "$INFILE") | less
 }
 decdit() {
 	local FILE="$1"
