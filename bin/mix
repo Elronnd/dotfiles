@@ -1,15 +1,24 @@
-#!/bin/sh
+#!/usr/bin/env zsh
 
 # toggle on pulse/linux needs below nonsense
 # amixer sset Headphone on; amixer sset Speaker on
 
 if [ $(uname) = Linux ]; then
 	# pulse
-	if pamixer --list-sinks; then
+	if pamixer --list-sinks && [[ $1 = switch || $1 = toggle ]]; then
 		case $1 in
 			louder) pamixer -i 5 ;;
 			quieter) pamixer -d 5 ;;
 			toggle) pamixer -t ;;
+			switch)
+				# todo https://gitlab.freedesktop.org/pulseaudio/pulseaudio/-/merge_requests/430
+				cur=$(pactl info | sed -En 's/Default Sink: (.*)/\1/p')
+				if [[ $cur =~ .*hdmi.* ]]; then
+					pactl set-default-sink 3
+				else
+					pactl set-default-sink 0
+				fi
+				;;
 		esac
 	# alsa
 	else
